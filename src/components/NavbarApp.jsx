@@ -1,8 +1,10 @@
 import React from 'react'
 import {Link, NavLink} from "react-router-dom"
+import usuario from '../data/usuarios'
 
 const NavbarApp = () => {
-     const usuario = JSON.parse(localStorage.getItem("user")) || null
+  // const usuario = JSON.parse(localStorage.getItem("user")) || null
+  console.log(usuario)
   return (
     <nav className="navbar navbar-expand-lg nav">
   <div className="container-fluid">
@@ -13,8 +15,19 @@ const NavbarApp = () => {
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav">
         <li className="nav-item">
-          <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Home</NavLink>
+          <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Planes</NavLink>
         </li>
+        <li className="nav-item">
+          <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Donde estamos</NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Planes</NavLink>
+        </li>
+        {
+          usuario.rol === "admin" ? <li className="nav-item">
+          <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Admin</NavLink>
+        </li> : ""
+        }
       </ul>
         {
             usuario ? <li className="nav-item ms-auto ms-0">
