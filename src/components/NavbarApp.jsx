@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link, NavLink} from "react-router-dom"
-import usuario from '../data/usuarios'
 
 const NavbarApp = () => {
   // const usuario = JSON.parse(localStorage.getItem("user")) || null
