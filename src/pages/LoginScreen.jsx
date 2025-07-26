@@ -3,62 +3,71 @@ import {useForm} from "react-hook-form"
 // import {useNavigate, Link} from "react-router-dom"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import axios from 'axios'
 
 const LoginScreen = () => {
   const MySwal = withReactContent(Swal)
 //   const navigate = useNavigate()
-  const { register, handleSubmit, reset, formState: { errors } } = useForm()
-  const { register: registerRegister, handleSubmit: handleSubmitRegister, reset: resetRegister, formState: { errors: errorsRegister } } = useForm()
+ const [showModal, setShowModal] = useState(false)
 
-  const [showModal, setShowModal] = useState(false)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm()
 
-  useEffect(() => {
-    localStorage.removeItem("user")
-  }, [])
+  const {
+    register: registerReg,
+    handleSubmit: handleSubmitReg,
+    formState: { errors: errorsReg },
+    reset: resetReg
+  } = useForm()
 
-  const logIn = (datos) => {
-    const usuario = (JSON.parse(localStorage.getItem("usuarios")) || []).find(
-      (user) => user.email === datos.correo && user.password === datos.password
-    )
-    if (usuario) {
-      const { username, email } = usuario
-      localStorage.setItem("user", JSON.stringify({ username, email }))
-      // navigate("/") // descomentar cuando use react-router
-    } else {
+  const logIn = async (datos) => {
+    try {
+      const { data } = await axios.post('http://localhost:3001/usuarios/login', {
+        nombreUsuario: datos.nombreUsuario,
+        password: datos.password
+      })
       MySwal.fire({
-        title: "OOPS!",
-        text: "Correo o contraseña incorrectos",
+        title: "¡Bienvenido!",
+        text: data.msg,
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false
+      })
+      reset()
+    } catch (error) {
+      MySwal.fire({
+        title: "Error",
+        text: error?.response?.data?.msg || "Error al iniciar sesión",
         icon: "error"
       })
     }
   }
 
-  const registrarUsuario = (datos) => {
-    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || []
-    const yaExiste = usuarios.some((u) => u.email === datos.email)
-
-    if (yaExiste) {
-      MySwal.fire({
-        icon: 'warning',
-        title: 'Correo ya registrado',
-        text: 'Intenta iniciar sesión o usa otro correo.'
+  const registerUser = async (datos) => {
+    try {
+      await axios.post('http://localhost:3001/usuarios/', {
+        nombreUsuario: datos.nombreUsuario,
+        emailUsuario: datos.emailUsuario,
+        password: datos.password
       })
-      return
+      MySwal.fire({
+        title: "¡Registro exitoso!",
+        text: "Ahora podés iniciar sesión",
+        icon: "success"
+      })
+      setShowModal(false)
+      resetReg()
+    } catch (error) {
+      MySwal.fire({
+        title: "Error",
+        text: error?.response?.data?.error || "No se pudo registrar",
+        icon: "error"
+      })
     }
-
-    usuarios.push({
-      username: datos.username,
-      email: datos.email,
-      password: datos.password
-    })
-    localStorage.setItem("usuarios", JSON.stringify(usuarios))
-    resetRegister()
-    setShowModal(false)
-    MySwal.fire({
-      icon: 'success',
-      title: 'Registro exitoso',
-      text: '¡Ahora puedes iniciar sesión!'
-    })
   }
 
   return (
@@ -72,21 +81,41 @@ const LoginScreen = () => {
             </div>
             <form onSubmit={handleSubmit(logIn)}>
               <div className="mb-4 position-relative">
-                <label className="form-label text-light">Correo electrónico</label>
-                <input type="email" className="form-control form-control-lg ps-4" {...register("correo", { required: true })} placeholder="nombre@ejemplo.com" />
-                {errors.correo && <p className='text-danger'>Este campo es obligatorio</p>}
+                <label className="form-label text-light">Nombre de usuario</label>
+                <input
+                  type="text"
+                  className="form-control form-control-lg ps-4"
+                  {...register("nombreUsuario", { required: true })}
+                  placeholder="nombreUsuario"
+                />
+                {errors.nombreUsuario && (
+                  <p role='alert' className='text-danger'>Este campo es obligatorio</p>
+                )}
+                <i className="bi bi-person-fill input-icon"></i>
               </div>
               <div className="mb-4 position-relative">
                 <label className="form-label text-light">Contraseña</label>
-                <input type="password" className="form-control form-control-lg ps-4" {...register("password", { required: true })} placeholder="••••••••" />
-                {errors.password && <p className='text-danger'>Este campo es obligatorio</p>}
+                <input
+                  type="password"
+                  className="form-control form-control-lg ps-4"
+                  {...register("password", { required: true })}
+                  placeholder="••••••••"
+                />
+                {errors.password && (
+                  <p role='alert' className='text-danger'>Este campo es obligatorio</p>
+                )}
+                <i className="bi bi-lock-fill input-icon"></i>
               </div>
               <button type="submit" className="btn btn-custom btn-lg w-100 mb-3 text-light custom-boton">
                 Iniciar sesión
               </button>
               <div className="text-center mt-4">
                 <span className="text-light">¿No tienes cuenta? </span>
-                <button type="button" onClick={() => setShowModal(true)} className="btn btn-link text-purple fw-bold text-decoration-none p-0">
+                <button
+                  type="button"
+                  className="btn btn-link text-purple fw-bold text-decoration-none"
+                  onClick={() => setShowModal(true)}
+                >
                   Regístrate
                 </button>
               </div>
@@ -95,38 +124,53 @@ const LoginScreen = () => {
         </div>
       </div>
 
-      {/* Modal de Registro */}
+      {/* MODAL DE REGISTRO */}
       {showModal && (
-        <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
-          <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content">
-              <form onSubmit={handleSubmitRegister(registrarUsuario)}>
-                <div className="modal-header">
-                  <h5 className="modal-title">Registro</h5>
-                  <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
-                </div>
-                <div className="modal-body">
+        <div className="modal d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}>
+          <div className="modal-dialog">
+            <div className="modal-content p-4">
+              <div className="modal-header">
+                <h5 className="modal-title">Registro</h5>
+                <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
+              </div>
+              <div className="modal-body">
+                <form onSubmit={handleSubmitReg(registerUser)}>
                   <div className="mb-3">
                     <label className="form-label">Nombre de usuario</label>
-                    <input type="text" className="form-control" {...registerRegister("username", { required: true })} />
-                    {errorsRegister.username && <p className='text-danger'>Este campo es obligatorio</p>}
+                    <input
+                      type="text"
+                      className="form-control"
+                      {...registerReg("nombreUsuario", { required: true, minLength: 5 })}
+                    />
+                    {errorsReg.nombreUsuario && (
+                      <p className='text-danger'>Mínimo 5 caracteres</p>
+                    )}
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Correo electrónico</label>
-                    <input type="email" className="form-control" {...registerRegister("email", { required: true })} />
-                    {errorsRegister.email && <p className='text-danger'>Este campo es obligatorio</p>}
+                    <input
+                      type="email"
+                      className="form-control"
+                      {...registerReg("emailUsuario", { required: true })}
+                    />
+                    {errorsReg.emailUsuario && (
+                      <p className='text-danger'>Email obligatorio</p>
+                    )}
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Contraseña</label>
-                    <input type="password" className="form-control" {...registerRegister("password", { required: true })} />
-                    {errorsRegister.password && <p className='text-danger'>Este campo es obligatorio</p>}
+                    <input
+                      type="password"
+                      className="form-control"
+                      {...registerReg("password", { required: true, minLength: 8 })}
+                    />
+                    {errorsReg.password && (
+                      <p className='text-danger'>Contraseña mínima de 8 caracteres</p>
+                    )}
                   </div>
-                </div>
-                <div className="modal-footer">
-                  <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Cerrar</button>
-                  <button type="submit" className="btn btn-primary">Registrarse</button>
-                </div>
-              </form>
+                  <button type="submit" className="btn btn-primary w-100">Registrarse</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
