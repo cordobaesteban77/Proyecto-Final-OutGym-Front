@@ -6,12 +6,7 @@ import NavbarApp from './components/NavbarApp'
 const App = () => {
   return (
     <div>
-      <BrowserRouter>
-      <NavbarApp />
-        <Routes>
-          <Route path="/" element={<Componente />} />
-        </Routes>
-      </BrowserRouter>
+      
     </div>
   )
 }
