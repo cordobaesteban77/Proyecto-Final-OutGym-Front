@@ -1,14 +1,16 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Componente from './components/componente'
-import NavbarApp from './components/NavbarApp'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/homepage";
 
 const App = () => {
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </Router>
+    </>
+  );
+};
 
-export default App
+export default App;
