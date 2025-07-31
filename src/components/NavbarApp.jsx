@@ -23,7 +23,7 @@ const NavbarApp = () => {
           <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Planes</NavLink>
         </li>
         {
-          usuario.rol === "admin" ? <li className="nav-item">
+          usuario.rolUsuario === "admin" ? <li className="nav-item">
           <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Admin</NavLink>
         </li> : ""
         }
