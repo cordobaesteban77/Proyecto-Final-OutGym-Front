@@ -3,7 +3,7 @@ import {Link, NavLink} from "react-router-dom"
 
 const NavbarApp = () => {
   // const usuario = JSON.parse(localStorage.getItem("user")) || null
-  console.log(usuario)
+  // console.log(usuario)
   return (
     <nav className="navbar navbar-expand-lg nav">
   <div className="container-fluid">
