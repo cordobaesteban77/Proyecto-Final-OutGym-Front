@@ -4,11 +4,12 @@ import {useForm} from "react-hook-form"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import axios from 'axios'
+import {useNavigate} from "react-router-dom"
 
 const LoginScreen = () => {
+  const navigate = useNavigate()
   const MySwal = withReactContent(Swal)
-//   const navigate = useNavigate()
- const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   const {
     register,
@@ -30,6 +31,7 @@ const LoginScreen = () => {
         nombreUsuario: datos.nombreUsuario,
         password: datos.password
       })
+      localStorage.setItem("token", data.token)
       MySwal.fire({
         title: "¡Bienvenido!",
         text: data.msg,
@@ -37,6 +39,7 @@ const LoginScreen = () => {
         timer: 2000,
         showConfirmButton: false
       })
+      navigate("/")
       reset()
     } catch (error) {
       MySwal.fire({

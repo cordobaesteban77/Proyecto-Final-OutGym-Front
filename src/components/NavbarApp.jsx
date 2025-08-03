@@ -1,9 +1,34 @@
 import React from 'react'
-import {Link, NavLink} from "react-router-dom"
+import {Link, NavLink, useNavigate} from "react-router-dom"
+import { jwtDecode } from "jwt-decode"
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const NavbarApp = () => {
-  // const usuario = JSON.parse(localStorage.getItem("user")) || null
-  // console.log(usuario)
+  const navigate = useNavigate();
+  const MySwal = withReactContent(Swal)
+  const token = localStorage.getItem("token");
+  let usuario = null;
+
+if (token) {
+  try {
+    usuario = jwtDecode(token)
+  } catch (error) {
+    console.error("Token inválido", error)
+  }
+}
+
+const handleLogout = () => {
+    localStorage.removeItem("token")
+    navigate("/")
+    MySwal.fire({
+        title: "¡Adios!",
+        text: "Sesión cerrada correctamente.",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false
+      })
+  }
   return (
     <nav className="navbar navbar-expand-lg nav">
   <div className="container-fluid">
@@ -23,17 +48,17 @@ const NavbarApp = () => {
           <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Planes</NavLink>
         </li>
         {
-          usuario.rolUsuario === "admin" ? <li className="nav-item">
+          usuario && usuario.rolUsuario === "admin" ? <li className="nav-item">
           <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Admin</NavLink>
         </li> : ""
         }
       </ul>
         {
             usuario ? <li className="nav-item ms-auto ms-0">
-            <NavLink className="nav-link color-avtivo ps-0" to="#">Cerrar sesión</NavLink>
+             <button className="btn btn-link nav-link color-avtivo ps-0" onClick={handleLogout}> Cerrar sesión </button>
             </li> : 
             <li className="nav-item ms-auto ms-0">
-            <NavLink className="nav-link color-avtivo ps-0" to="#">Iniciar sesión</NavLink>
+            <NavLink className="nav-link color-avtivo ps-0" to="/login">Iniciar sesión</NavLink>
             </li>
         }
     </div>
