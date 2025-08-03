@@ -1,0 +1,112 @@
+.sobre-wrapper {
+  background: #06283D; 
+  color: white;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.sobre-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.logo-top {
+  width: 250px;
+  margin-bottom: 30px;
+  animation: zoomIn 1.5s;
+}
+
+.titulo-sobre {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: #1363DF; 
+}
+
+.texto-sobre {
+  max-width: 800px;
+  font-size: 20px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+  color: #DFF6FF; 
+}
+
+.equipo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 30px;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.card-nosotros {
+  background: #DFF6FF; 
+  border: 2px solid #47B5FF;
+  border-radius: 15px;
+  width: 250px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  color: #06283D;
+}
+
+.card-nosotros:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(71, 181, 255, 0.6);
+}
+
+.card-nosotros img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+
+.card-nosotros p {
+  font-size: 20px;
+  margin: 15px 0;
+  color: #1363DF;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+
+@media (max-width: 768px) {
+  .equipo-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .titulo-sobre {
+    font-size: 36px;
+  }
+
+  .texto-sobre {
+    font-size: 18px;
+    padding: 0 10px;
+  }
+
+  .card-nosotros {
+    width: 90%;
+  }
+
+  .logo-top {
+    width: 180px;
+  }
+}
+
+
+
+
+
+
+
