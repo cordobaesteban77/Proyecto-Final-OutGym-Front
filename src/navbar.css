@@ -13,3 +13,7 @@ nav {
 .color-avtivo:hover {
     color: #DFF6FF;
 }
+
+.logo {
+    height: 60px;
+}
