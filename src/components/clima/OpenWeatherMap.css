@@ -1,0 +1,260 @@
+/* Contenedor principal y título */
+.weather-widget-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.weather-main-title {
+  text-align: center;
+  color: #06283d;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  font-weight: normal;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  padding-bottom: 15px;
+  border-bottom: 2px solid #06283d;
+}
+
+/* Estilos base del widget */
+.weather-widget {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #06283d, #1363df);
+  color: white;
+  border-radius: 0;
+  padding: 12px 15px;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(105, 70, 70, 0.2);
+  margin: 10px 0;
+  box-sizing: border-box;
+}
+
+.weather-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* Selector de ubicación */
+.weather-location-selector {
+  flex: 1 1 120px;
+  min-width: 120px;
+}
+
+.weather-location-select {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+.weather-location-select option {
+  color: #000;
+  background: white;
+}
+
+/* Display principal */
+.weather-main-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.weather-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.weather-temp {
+  font-size: 1.8rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* Información de ciudad y descripción */
+.weather-city-info,
+.weather-description {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  flex: 1 1 140px;
+}
+
+/* Detalles del clima */
+.weather-details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+  flex: 2 1 200px;
+  justify-content: flex-end;
+}
+
+.weather-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.weather-icon-sm {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* Estados */
+.weather-loading,
+.weather-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.weather-error {
+  flex-direction: column;
+}
+
+.weather-error p {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 1200px) {
+  .weather-container {
+    gap: 12px;
+  }
+
+  .weather-details {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 992px) {
+  .weather-main-title {
+    font-size: 2rem;
+  }
+
+  .weather-city-info,
+  .weather-description {
+    flex-basis: 120px;
+  }
+
+  .weather-detail-item {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .weather-main-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .weather-container {
+    row-gap: 15px;
+    column-gap: 10px;
+  }
+
+  .weather-main-display {
+    order: 1;
+  }
+
+  .weather-city-info {
+    order: 2;
+  }
+
+  .weather-description {
+    order: 3;
+  }
+
+  .weather-details {
+    order: 4;
+    flex-basis: 100%;
+    justify-content: space-between;
+    margin-top: 5px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .weather-location-selector {
+    order: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .weather-main-title {
+    font-size: 1.5rem;
+    padding-bottom: 10px;
+  }
+
+  .weather-widget {
+    padding: 10px 12px;
+  }
+
+  .weather-container {
+    gap: 10px;
+  }
+
+  .weather-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .weather-temp {
+    font-size: 1.6rem;
+  }
+
+  .weather-city-info,
+  .weather-description {
+    font-size: 0.85rem;
+    flex-basis: calc(50% - 5px);
+  }
+
+  .weather-detail-item {
+    font-size: 0.8rem;
+    gap: 3px;
+  }
+
+  .weather-icon-sm {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .weather-main-title {
+    font-size: 1.3rem;
+  }
+
+  .weather-location-select {
+    font-size: 0.8rem;
+    padding: 6px 8px;
+  }
+
+  .weather-city-info,
+  .weather-description {
+    flex-basis: 100%;
+  }
+
+  .weather-details {
+    gap: 8px;
+  }
+
+  .weather-detail-item {
+    flex-basis: calc(50% - 4px);
+  }
+}

@@ -1,0 +1,129 @@
+/* Estilos base */
+.gym-jumbotron {
+  width: 100%;
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+  color: #06283d; /* Color principal aplicado al contenedor */
+}
+
+.jumbotron-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  color: inherit; /* Hereda el color del padre */
+}
+
+.jumbotron-image-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.jumbotron-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.jumbotron-image:hover {
+  transform: scale(1.03);
+}
+
+/* Contenido de texto */
+.jumbotron-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 2rem;
+  color: inherit; /* Hereda el color del padre */
+}
+
+/* Título */
+.jumbotron-title {
+  font-size: 2.5rem;
+  color: inherit; /* Hereda el color del padre */
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: left;
+}
+
+/* Descripción */
+.jumbotron-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  text-align: left;
+  color: #06283d;
+}
+
+.jumbotron-button {
+  background-color: #1363df;
+  color: white; /* Color blanco para contraste en botón */
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  font-weight: 600;
+}
+
+.jumbotron-button:hover {
+  background-color: #0e4eb5;
+  transform: translateY(2px);
+  box-shadow: 0 5px 15px rgba(19, 99, 223, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .jumbotron-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .jumbotron-image-container {
+    height: 400px;
+  }
+
+  .jumbotron-title {
+    font-size: 2rem;
+  }
+
+  .jumbotron-description {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .gym-jumbotron {
+    padding: 3rem 1.5rem;
+  }
+
+  .jumbotron-title {
+    font-size: 1.8rem;
+  }
+
+  .jumbotron-description {
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+}
+
+@media (max-width: 576px) {
+  .jumbotron-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .jumbotron-description {
+    padding: 0;
+  }
+}
