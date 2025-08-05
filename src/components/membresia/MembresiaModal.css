@@ -3,7 +3,6 @@
   width: 100%;
   padding: 4rem 2rem;
   background-color: #ffffff;
-  color: white;
 }
 
 .jumbotron-grid {
@@ -63,7 +62,7 @@
 .jumbotron-button {
   background-color: transparent;
   color: #06283d;
-  border: 2px solid #1363df;
+  border: 2px solid #06283d;
   padding: 12px 30px;
   font-size: 1.1rem;
   font-weight: bold;
@@ -74,7 +73,7 @@
 }
 
 .jumbotron-button:hover {
-  background-color: #1363df;
+  background-color: #06283d;
   color: white;
 }
 
