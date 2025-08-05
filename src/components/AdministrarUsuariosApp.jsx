@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const API_URL = "http://localhost:3001";
 
@@ -7,7 +8,6 @@ const AdministrarUsuariosApp = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
   const [formData, setFormData] = useState({ nombreUsuario: "", emailUsuario: "" });
-  const [modoEdicion, setModoEdicion] = useState(false);
 
   useEffect(() => {
     obtenerUsuarios();
@@ -16,7 +16,7 @@ const AdministrarUsuariosApp = () => {
   const obtenerUsuarios = () => {
     axios.get(`${API_URL}/usuarios`)
       .then(res => setUsuarios(res.data.usuarios || []))
-      .catch(() => alert("Error al cargar usuarios"));
+      .catch(() => Swal.fire('Error', 'Error al cargar usuarios', 'error'));
   };
 
   const handleChange = (e) => {
@@ -26,23 +26,16 @@ const AdministrarUsuariosApp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      if (modoEdicion && usuarioSeleccionado) {
-        // Editar
-        await axios.put(`${API_URL}/usuarios/${usuarioSeleccionado._id}`, formData);
-        alert("Usuario actualizado correctamente");
-      } else {
-        // Crear
-        await axios.post(`${API_URL}/usuarios`, formData);
-        alert("Usuario creado correctamente");
-      }
+    if (!usuarioSeleccionado) return;
 
+    try {
+      await axios.put(`${API_URL}/usuarios/${usuarioSeleccionado._id}`, formData);
+      await Swal.fire('Éxito', 'Usuario actualizado correctamente', 'success');
       obtenerUsuarios();
-      setFormData({ nombreUsuario: "", emailUsuario: "" });
-      setModoEdicion(false);
       setUsuarioSeleccionado(null);
+      setFormData({ nombreUsuario: "", emailUsuario: "" });
     } catch (err) {
-      alert("Error al guardar el usuario");
+      Swal.fire('Error', 'Error al actualizar el usuario', 'error');
     }
   };
 
@@ -52,64 +45,72 @@ const AdministrarUsuariosApp = () => {
       nombreUsuario: user.nombreUsuario,
       emailUsuario: user.emailUsuario
     });
-    setModoEdicion(true);
   };
 
   const handleEliminar = async (id) => {
-    if (!window.confirm("¿Estás seguro de que querés eliminar este usuario?")) return;
-    try {
-      await axios.delete(`${API_URL}/usuarios/${id}`);
-      alert("Usuario eliminado correctamente");
-      obtenerUsuarios();
-    } catch {
-      alert("Error al eliminar el usuario");
+    const result = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: "No podrás revertir esta acción",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await axios.delete(`${API_URL}/usuarios/${id}`);
+        await Swal.fire('Eliminado', 'Usuario eliminado correctamente', 'success');
+        obtenerUsuarios();
+      } catch {
+        Swal.fire('Error', 'Error al eliminar el usuario', 'error');
+      }
     }
   };
 
   return (
     <div className="container mt-4 text-light">
-      <h2>{modoEdicion ? "Editar Usuario" : "Agregar Usuario"}</h2>
+      <h2>Editar Usuario</h2>
 
-      <form onSubmit={handleSubmit} className="mb-4">
-        <div className="mb-3">
-          <label className="form-label">Nombre de Usuario</label>
-          <input
-            type="text"
-            className="form-control"
-            name="nombreUsuario"
-            value={formData.nombreUsuario}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Correo Electrónico</label>
-          <input
-            type="email"
-            className="form-control"
-            name="emailUsuario"
-            value={formData.emailUsuario}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-success">
-          {modoEdicion ? "Actualizar" : "Crear"}
-        </button>
-        {modoEdicion && (
+      {usuarioSeleccionado ? (
+        <form onSubmit={handleSubmit} className="mb-4">
+          <div className="mb-3">
+            <label className="form-label">Nombre de Usuario</label>
+            <input
+              type="text"
+              className="form-control"
+              name="nombreUsuario"
+              value={formData.nombreUsuario}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Correo Electrónico</label>
+            <input
+              type="email"
+              className="form-control"
+              name="emailUsuario"
+              value={formData.emailUsuario}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button type="submit" className="btn btn-success">Actualizar</button>
           <button
             type="button"
             className="btn btn-secondary ms-2"
             onClick={() => {
-              setModoEdicion(false);
               setUsuarioSeleccionado(null);
               setFormData({ nombreUsuario: "", emailUsuario: "" });
             }}
           >
             Cancelar
           </button>
-        )}
-      </form>
+        </form>
+      ) : (
+        <p>Selecciona un usuario para editar</p>
+      )}
 
       <h3>Usuarios registrados</h3>
       <ul className="list-group">
@@ -131,3 +132,4 @@ const AdministrarUsuariosApp = () => {
 };
 
 export default AdministrarUsuariosApp;
+
