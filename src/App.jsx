@@ -1,7 +1,7 @@
-import { useState } from "react";
-import Footer from "./components/footer.jsx";
-import SobreNosotros from "./components/Sobrenosotros.jsx";
-import { BrowserRouter as Router, Routes, Route, BrowserRouter, } from "react-router-dom";
+import { useState } from 'react'
+import Footer from './components/footer.jsx'
+import SobreNosotros from './components/Sobrenosotros.jsx'
+import { BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import NotFoundScreen from "./pages/NotFoundScreen";
 import LoginScreen from "./pages/LoginScreen";
