@@ -39,26 +39,29 @@ const handleLogout = () => {
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav">
         <li className="nav-item">
-          <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Inicio</NavLink>
+          <NavLink className={({isActive}) => isActive ? "nav-link color-activo" : "nav-link text-light"} aria-current="page" to="/">Inicio</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/about">Sobre nosotros</NavLink>
+          <NavLink className={({isActive}) => isActive ? "nav-link color-activo" : "nav-link text-light"} aria-current="page" to="/">Planes</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Planes</NavLink>
+          <NavLink className={({isActive}) => isActive ? "nav-link color-activo" : "nav-link text-light"} aria-current="page" to="/">Contacto</NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className={({isActive}) => isActive ? "nav-link color-activo" : "nav-link text-light"} aria-current="page" to="/about">Sobre nosotros</NavLink>
         </li>
         {
           usuario && usuario.rolUsuario === "admin" ? <li className="nav-item">
-          <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Admin</NavLink>
+          <NavLink className={({isActive}) => isActive ? "nav-link color-activo" : "nav-link text-light"} aria-current="page" to="/">Admin</NavLink>
         </li> : ""
         }
       </ul>
         {
             usuario ? <li className="nav-item ms-auto ms-0">
-             <button className="btn btn-link nav-link color-avtivo ps-0" onClick={handleLogout}> Cerrar sesión </button>
+             <button className="btn btn-link nav-link color-activo ps-0" onClick={handleLogout}> Cerrar sesión </button>
             </li> : 
             <li className="nav-item ms-auto ms-0">
-            <NavLink className="nav-link color-avtivo ps-0" to="/login">Iniciar sesión</NavLink>
+            <NavLink className="nav-link color-activo ps-0" to="/login">Iniciar sesión</NavLink>
             </li>
         }
     </div>
