@@ -11,7 +11,7 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-      <NavbarApp />
+        <NavbarApp />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginScreen />} />
@@ -20,7 +20,6 @@ const App = () => {
         </Routes>
         <Footer />
       </BrowserRouter>
-
     </>
   );
 };
