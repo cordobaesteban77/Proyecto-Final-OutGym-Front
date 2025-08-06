@@ -1,0 +1,89 @@
+/* Contenedor principal de dos columnas */
+/* Contenedor full-width con fondo blanco */
+.full-width-container {
+  width: 100%;
+  background-color: white;
+  padding-bottom: 20px;
+}
+
+/* Contenedor del contenido (centrado con max-width) */
+.two-column-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+/* El resto de tus estilos permanece igual */
+.titles-column,
+.accordion-column {
+  flex: 1 1 45%;
+  min-width: 300px;
+}
+
+.titles-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.planes-title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.planes-subtitle {
+  font-size: 1.2rem;
+  color: #1363df;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.accordion {
+  --bs-accordion-border-color: #e9ecef;
+}
+
+.accordion-button {
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .titles-column,
+  .accordion-column {
+    flex: 1 1 100%;
+  }
+
+  .titles-column {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+}
+
+.accordion-button:not(.collapsed) {
+  font-weight: bold;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: rgba(0, 0, 0, 0.125);
+}
+
+.subscribe-btn {
+  align-self: flex-start;
+  padding: 8px 20px;
+  font-weight: 600;
+  background-color: #06283d !important;
+  border-color: #06283d !important;
+  transition: all 0.3s ease;
+}
+
+.subscribe-btn:hover {
+  background-color: #054569 !important;
+  border-color: #054569 !important;
+  transform: translateY(-2px);
+}

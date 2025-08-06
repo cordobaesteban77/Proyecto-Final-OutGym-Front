@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import {useForm} from "react-hook-form"
-// import {useNavigate, Link} from "react-router-dom"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import axios from 'axios'
+import {useNavigate} from "react-router-dom"
 
 const LoginScreen = () => {
+  const navigate = useNavigate()
   const MySwal = withReactContent(Swal)
-//   const navigate = useNavigate()
- const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   const {
     register,
@@ -21,8 +21,12 @@ const LoginScreen = () => {
     register: registerReg,
     handleSubmit: handleSubmitReg,
     formState: { errors: errorsReg },
-    reset: resetReg
+    reset: resetReg,
+    watch
   } = useForm()
+
+  
+  const passwordValue = watch("password") 
 
   const logIn = async (datos) => {
     try {
@@ -30,6 +34,7 @@ const LoginScreen = () => {
         nombreUsuario: datos.nombreUsuario,
         password: datos.password
       })
+      localStorage.setItem("token", data.token)
       MySwal.fire({
         title: "¡Bienvenido!",
         text: data.msg,
@@ -37,6 +42,7 @@ const LoginScreen = () => {
         timer: 2000,
         showConfirmButton: false
       })
+      navigate("/")
       reset()
     } catch (error) {
       MySwal.fire({
@@ -125,7 +131,7 @@ const LoginScreen = () => {
       </div>
 
       {/* MODAL DE REGISTRO */}
-      {showModal && (
+       {showModal && (
         <div className="modal d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}>
           <div className="modal-dialog">
             <div className="modal-content p-4">
@@ -166,6 +172,20 @@ const LoginScreen = () => {
                     />
                     {errorsReg.password && (
                       <p className='text-danger'>Contraseña mínima de 8 caracteres</p>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Repetir contraseña</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      {...registerReg("repetirPassword", {
+                        required: true,
+                        validate: value => value === passwordValue || "Las contraseñas no coinciden"
+                      })}
+                    />
+                    {errorsReg.repetirPassword && (
+                      <p className='text-danger'>{errorsReg.repetirPassword.message}</p>
                     )}
                   </div>
                   <button type="submit" className="btn btn-primary w-100">Registrarse</button>
