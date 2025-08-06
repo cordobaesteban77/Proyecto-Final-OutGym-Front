@@ -1,0 +1,15 @@
+body {
+    background-color: #06283D;
+}
+
+html {
+    background-color: #06283D;
+}
+
+.custom-boton {
+    background-color: #1363DF;
+}
+
+.custom-boton:hover {
+    background-color: #47B5FF;
+}

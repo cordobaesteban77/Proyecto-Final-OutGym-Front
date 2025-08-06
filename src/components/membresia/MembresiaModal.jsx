@@ -21,11 +21,17 @@ const MembresiaModal = () => {
           <p className="jumbotron-description">
             Acceso ilimitado a todas las instalaciones, aparatos y clases sin
             necesidad de reservas previas. Disfruta de la libertad de entrenar
-            cuando quieras y participar en todas las actividades que ofrecemos.
+            cuando quieras y participar en todas las actividades que ofrecemos y
+            un bonus extra de un 20% de descuento en todas nuestros productos.
           </p>
-          <button className="jumbotron-button" onClick={handleOpenModal}>
-            ¿Qué incluye?
-          </button>
+          <div className="jumbotron-buttons-container">
+            <button className="jumbotron-button" onClick={handleOpenModal}>
+              ¿Qué incluye?
+            </button>
+            <button className="jumbotron-button inverse-button">
+              ¡Quiero la Membresía!
+            </button>
+          </div>
         </div>
       </div>
 
@@ -44,7 +50,8 @@ const MembresiaModal = () => {
             <h2 className="modal-title">MEMBRESIA PREMIUM</h2>
             <p className="modal-description">
               Es el pase libre al uso de todas las instalaciones sin turnos
-              previos y con acceso a tomar todas las clases que quieras.
+              previos y con acceso a tomar todas las clases que quieras. Además
+              un 20% de descuento en todos los productos de venta en OUTGYM.
             </p>
             <button className="modal-close-button" onClick={handleCloseModal}>
               Cerrar

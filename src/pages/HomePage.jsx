@@ -3,6 +3,7 @@ import CardHome from "../components/card/Cards";
 import WeatherWidget from "../components/clima/OpenWeatherMap";
 import GymJumbotron from "../components/jumbotron/GymJumbotron";
 import MembresiaModal from "../components/membresia/membresiaModal";
+import PlanesC from "../components/planes/PlanesC";
 
 const HomePage = () => {
   return (
@@ -12,6 +13,7 @@ const HomePage = () => {
       <WeatherWidget />
       <CardHome />
       <MembresiaModal />
+      <PlanesC />
     </>
   );
 };
