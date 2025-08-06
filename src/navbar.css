@@ -6,10 +6,18 @@ nav {
     background-color: #06283D;
 }
 
-.color-avtivo {
+.color-activo {
     color: #47B5FF;
 }
 
-.color-avtivo:hover {
+.color-activo:focus {
+    color: #47B5FF;
+}
+
+.color-activo:hover {
     color: #DFF6FF;
+}
+
+.logo {
+    height: 60px;
 }
