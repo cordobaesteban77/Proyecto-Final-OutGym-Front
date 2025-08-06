@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import NotFoundScreen from "./pages/NotFoundScreen";
 import LoginScreen from "./pages/LoginScreen";
 import NavbarApp from "./components/NavbarApp";
+import AdministrarUsuariosApp from "./components/AdministrarUsuariosApp.jsx";
 
 const App = () => {
   return (
