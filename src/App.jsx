@@ -11,6 +11,7 @@ import HomePage from "./pages/HomePage";
 import NotFoundScreen from "./pages/NotFoundScreen";
 import LoginScreen from "./pages/LoginScreen";
 import NavbarApp from "./components/NavbarApp";
+import AdminPage from "./pages/AdminPage.jsx";
 const App = () => {
   return (
     <>
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/about" element={<SobreNosotros />} />
           <Route path="*" element={<NotFoundScreen />} />
+          <Route path="/adminpage" element={<AdminPage/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>

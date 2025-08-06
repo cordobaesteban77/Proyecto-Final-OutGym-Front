@@ -30,7 +30,7 @@ const handleLogout = () => {
       })
   }
   return (
-    <nav className="navbar navbar-expand-lg nav">
+    <nav className="navbar navbar-expand-lg nav" style={{zIndex: 2}}>
   <div className="container-fluid">
     <Link className="navbar-brand text-light" to="/">Logo</Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ const handleLogout = () => {
         </li>
         {
           usuario && usuario.rolUsuario === "admin" ? <li className="nav-item">
-          <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Admin</NavLink>
+          <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/adminpage">Admin</NavLink>
         </li> : ""
         }
       </ul>
