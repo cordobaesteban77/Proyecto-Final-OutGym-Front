@@ -7,16 +7,21 @@ const API_URL = "http://localhost:3001";
 const AdministrarUsuariosApp = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
-  const [formData, setFormData] = useState({ nombreUsuario: "", emailUsuario: "" });
+  const [formData, setFormData] = useState({
+    nombreUsuario: "",
+    emailUsuario: "",
+    rolUsuario: "usuario",
+  });
 
   useEffect(() => {
     obtenerUsuarios();
   }, []);
 
   const obtenerUsuarios = () => {
-    axios.get(`${API_URL}/usuarios`)
-      .then(res => setUsuarios(res.data.usuarios || []))
-      .catch(() => Swal.fire('Error', 'Error al cargar usuarios', 'error'));
+    axios
+      .get(`${API_URL}/usuarios`)
+      .then((res) => setUsuarios(res.data.usuarios || []))
+      .catch(() => Swal.fire("Error", "Error al cargar usuarios", "error"));
   };
 
   const handleChange = (e) => {
@@ -30,12 +35,12 @@ const AdministrarUsuariosApp = () => {
 
     try {
       await axios.put(`${API_URL}/usuarios/${usuarioSeleccionado._id}`, formData);
-      await Swal.fire('Éxito', 'Usuario actualizado correctamente', 'success');
+      await Swal.fire("Éxito", "Usuario actualizado correctamente", "success");
       obtenerUsuarios();
       setUsuarioSeleccionado(null);
-      setFormData({ nombreUsuario: "", emailUsuario: "" });
+      setFormData({ nombreUsuario: "", emailUsuario: "", rolUsuario: "usuario" });
     } catch (err) {
-      Swal.fire('Error', 'Error al actualizar el usuario', 'error');
+      Swal.fire("Error", "Error al actualizar el usuario", "error");
     }
   };
 
@@ -43,27 +48,28 @@ const AdministrarUsuariosApp = () => {
     setUsuarioSeleccionado(user);
     setFormData({
       nombreUsuario: user.nombreUsuario,
-      emailUsuario: user.emailUsuario
+      emailUsuario: user.emailUsuario,
+      rolUsuario: user.rolUsuario || "usuario",
     });
   };
 
   const handleEliminar = async (id) => {
     const result = await Swal.fire({
-      title: '¿Estás seguro?',
+      title: "¿Estás seguro?",
       text: "No podrás revertir esta acción",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
     });
 
     if (result.isConfirmed) {
       try {
         await axios.delete(`${API_URL}/usuarios/${id}`);
-        await Swal.fire('Eliminado', 'Usuario eliminado correctamente', 'success');
+        await Swal.fire("Eliminado", "Usuario eliminado correctamente", "success");
         obtenerUsuarios();
       } catch {
-        Swal.fire('Error', 'Error al eliminar el usuario', 'error');
+        Swal.fire("Error", "Error al eliminar el usuario", "error");
       }
     }
   };
@@ -96,13 +102,26 @@ const AdministrarUsuariosApp = () => {
               required
             />
           </div>
+          <div className="mb-3">
+            <label className="form-label">Rol del Usuario</label>
+            <select
+              className="form-select"
+              name="rolUsuario"
+              value={formData.rolUsuario}
+              onChange={handleChange}
+              required
+            >
+              <option value="usuario">usuario</option>
+              <option value="admin">admin</option>
+            </select>
+          </div>
           <button type="submit" className="btn btn-success">Actualizar</button>
           <button
             type="button"
             className="btn btn-secondary ms-2"
             onClick={() => {
               setUsuarioSeleccionado(null);
-              setFormData({ nombreUsuario: "", emailUsuario: "" });
+              setFormData({ nombreUsuario: "", emailUsuario: "", rolUsuario: "usuario" });
             }}
           >
             Cancelar
@@ -119,6 +138,7 @@ const AdministrarUsuariosApp = () => {
             <div>
               <strong>{user.nombreUsuario}</strong> - {user.emailUsuario}
               <div className="text-muted">Plan: {user.planContratado || "Ninguno"}</div>
+              <div className="text-muted">Rol: {user.rolUsuario || "usuario"}</div>
             </div>
             <div>
               <button className="btn btn-sm btn-primary me-2" onClick={() => handleEditar(user)}>Editar</button>
@@ -132,4 +152,5 @@ const AdministrarUsuariosApp = () => {
 };
 
 export default AdministrarUsuariosApp;
+
 
