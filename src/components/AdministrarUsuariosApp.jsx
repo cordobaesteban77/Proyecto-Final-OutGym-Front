@@ -76,7 +76,7 @@ const AdministrarUsuariosApp = () => {
 
   return (
     <div className="container mt-4 text-light">
-      <h2>Editar Usuario</h2>
+      <h2 className="text-center" style={{ color: '#06283D' }}>Panel de Usuarios</h2>
 
       {usuarioSeleccionado ? (
         <form onSubmit={handleSubmit} className="mb-4">
@@ -128,10 +128,10 @@ const AdministrarUsuariosApp = () => {
           </button>
         </form>
       ) : (
-        <p>Selecciona un usuario para editar</p>
+        <p className="text-center mb-4" style={{ color: '#06283D' }}>Selecciona un usuario para editar</p>
       )}
 
-      <h3>Usuarios registrados</h3>
+      <h3 className="text-center" style={{ color: '#06283D' }}>Usuarios registrados</h3>
       <ul className="list-group">
         {usuarios.map((user) => (
           <li key={user._id} className="list-group-item d-flex justify-content-between align-items-center">
