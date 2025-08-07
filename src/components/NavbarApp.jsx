@@ -68,7 +68,21 @@ const NavbarApp = () => {
                 Planes
               </a>
             </li>
-            <li className="nav-item">
+            
+            {usuario && usuario.rolUsuario === "usuario" ? (
+              <li className="nav-item">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "nav-link color-activo" : "nav-link text-light"
+                  }
+                  aria-current="page"
+                  to="/misclases"
+                >
+                  Mis Clases
+                </NavLink>
+              </li>
+            ) : (
+              <li className="nav-item">
               <NavLink
                 className={({ isActive }) =>
                   isActive ? "nav-link color-activo" : "nav-link text-light"
@@ -79,7 +93,21 @@ const NavbarApp = () => {
                 Contacto
               </NavLink>
             </li>
-            <li className="nav-item">
+            )}
+            {usuario && usuario.rolUsuario === "usuario" ? (
+              <li className="nav-item">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "nav-link color-activo" : "nav-link text-light"
+                  }
+                  aria-current="page"
+                  to="/solicitarclase"
+                >
+                  SolicitarClase
+                </NavLink>
+              </li>
+            ) : (
+              <li className="nav-item">
               <NavLink
                 className={({ isActive }) =>
                   isActive ? "nav-link color-activo" : "nav-link text-light"
@@ -90,6 +118,7 @@ const NavbarApp = () => {
                 Sobre nosotros
               </NavLink>
             </li>
+            )}
             {usuario && usuario.rolUsuario === "admin" ? (
               <li className="nav-item">
                 <NavLink
