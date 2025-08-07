@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Footer from "./components/footer.jsx";
+import Footer from "../components/footer.jsx";
 import SobreNosotros from "./components/Sobrenosotros.jsx";
 import {
   BrowserRouter as Router,
