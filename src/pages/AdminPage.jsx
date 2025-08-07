@@ -39,7 +39,7 @@ const AdminPage = () => {
   };
 
   const handleEditar = (producto) => {
-    setProductoEditando(producto); // 👈 cargamos producto a editar
+    setProductoEditando(producto);
     setMostrarFormulario(true);
   };
 

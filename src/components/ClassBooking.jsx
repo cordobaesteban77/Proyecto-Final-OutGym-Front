@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
-// Mapeo de días a índices de JS: 0=Domingo, 1=Lunes, ..., 6=Sábado
 const dayMap = {
   Lunes: 1,
   Martes: 2,
@@ -25,6 +28,50 @@ const ClassBooking = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState('');
   const [bookingCount, setBookingCount] = useState(0);
+  const [nombreUsuario, setNombreUsuario] = useState(null);
+  const [emailUsuario, setEmailUsuario] = useState(null);
+  const [idUsuario, setIdUsuario] = useState(null);
+  const [loadingUser, setLoadingUser] = useState(true);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setIdUsuario(decoded.idUsuario);
+
+        axios
+          .get(`http://localhost:3001/usuarios/${decoded.idUsuario}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((response) => {
+            const usuario = response.data;
+            setNombreUsuario(usuario.nombreUsuario || "Administrador");
+            setEmailUsuario(usuario.emailUsuario || "sin@email.com");
+          })
+          .catch((error) => {
+            console.error("Error al obtener usuario:", error);
+            setNombreUsuario("Administrador");
+            setEmailUsuario("sin@email.com");
+          })
+          .finally(() => {
+            setLoadingUser(false);
+          });
+
+      } catch (err) {
+        console.error('Token inválido:', err);
+        setNombreUsuario("Administrador");
+        setEmailUsuario("sin@email.com");
+        setLoadingUser(false);
+      }
+    } else {
+      setLoadingUser(false);
+    }
+  }, []);
 
   const handleClassChange = (e) => {
     setSelectedClass(e.target.value);
@@ -43,11 +90,16 @@ const ClassBooking = () => {
   useEffect(() => {
     const fetchCount = async () => {
       if (selectedClass && selectedDate && selectedTime) {
-        const dateStr = selectedDate.toISOString().split('T')[0];
         try {
-          const res = await fetch(`http://localhost:3001/bookings/count?classType=${selectedClass}&date=${dateStr}&time=${selectedTime}`);
-          const data = await res.json();
-          setBookingCount(data.count);
+          const dateStr = selectedDate.toISOString().split('T')[0];
+          const res = await axios.get(`http://localhost:3001/bookings/count`, {
+            params: {
+              classType: selectedClass,
+              date: dateStr,
+              time: selectedTime
+            }
+          });
+          setBookingCount(res.data.count);
         } catch (err) {
           console.error('Error al obtener cantidad:', err);
         }
@@ -56,22 +108,62 @@ const ClassBooking = () => {
     fetchCount();
   }, [selectedClass, selectedDate, selectedTime]);
 
-  return (
-    <div style={{ maxWidth: 400, margin: 'auto', padding: 20 }}>
-      <h2>Reservar clase</h2>
+  const handleReserve = async () => {
+    if (loadingUser) {
+      Swal.fire('Espere', 'Cargando datos del usuario...', 'info');
+      return;
+    }
+    if (!nombreUsuario || !emailUsuario) {
+      Swal.fire('Error', 'Datos de usuario incompletos.', 'error');
+      return;
+    }
+    if (selectedDate && selectedTime) {
+      try {
+        const response = await axios.post('http://localhost:3001/bookings', {
+          classType: selectedClass,
+          date: selectedDate.toISOString().split('T')[0],
+          time: selectedTime,
+          name: nombreUsuario,
+          email: emailUsuario,
+          userId: idUsuario // Este es el id que se guarda en el modelo
+        });
+        Swal.fire('¡Éxito!', response.data.message || 'Reserva registrada con éxito', 'success');
+        setBookingCount(prev => prev + 1);
+      } catch (error) {
+        Swal.fire('Error', error.response?.data?.message || 'Error al registrar reserva', 'error');
+      }
+    }
+  };
 
-      <select value={selectedClass} onChange={handleClassChange}>
-        <option value="">Clase</option>
-        {Object.keys(classSchedule).map(c => <option key={c}>{c}</option>)}
-      </select>
+  
+
+  return (
+    <div className="container my-5" style={{ maxWidth: '500px', color: '#06283D' }}>
+      <h2 className="mb-4 text-center">Reservar Clase</h2>
+
+      <div className="mb-3">
+        <label className="form-label">Clase:</label>
+        <select
+          className="form-select"
+          value={selectedClass}
+          onChange={handleClassChange}
+          disabled={loadingUser}
+        >
+          <option value="">Seleccioná una clase</option>
+          {Object.keys(classSchedule).map(c => (
+            <option key={c}>{c}</option>
+          ))}
+        </select>
+      </div>
 
       {selectedClass && (
         <>
-          <div style={{ marginTop: 10 }}>
-            <label>Fecha:</label>
+          <div className="mb-5 p-5">
+            <label className="form-label me-2">Fecha:</label>
             <DatePicker
+              key={selectedClass}
               selected={selectedDate}
-              onChange={date => {
+              onChange={(date) => {
                 setSelectedDate(date);
                 const weekday = Object.keys(dayMap).find(key => dayMap[key] === date.getDay());
                 setSelectedDay(weekday);
@@ -80,56 +172,45 @@ const ClassBooking = () => {
               placeholderText="Seleccioná una fecha disponible"
               dateFormat="yyyy-MM-dd"
               minDate={new Date()}
-              className="p-2 border rounded"
+              className="form-control"
+              disabled={loadingUser}
             />
           </div>
 
-          <div style={{ marginTop: 10 }}>
-            <label>Horario:</label>
-            <select value={selectedTime} onChange={e => setSelectedTime(e.target.value)}>
-              <option value="">Seleccioná horario</option>
-              {classSchedule[selectedClass].times.map(t => (
+          <div className="mb-3">
+            <label className="form-label">Horario:</label>
+            <select
+              className="form-select"
+              value={selectedTime}
+              onChange={(e) => setSelectedTime(e.target.value)}
+              disabled={loadingUser}
+            >
+              <option value="">Seleccioná un horario</option>
+              {classSchedule[selectedClass].times.map((t) => (
                 <option key={t}>{t}</option>
               ))}
             </select>
           </div>
 
           {selectedDate && selectedTime && (
-            <p style={{ marginTop: 10 }}>
-              Clases Reservadas: <strong>{bookingCount}</strong>/20
-            </p>
+            <div className="mb-3 text-center">
+              <p>
+                Clases Reservadas: <strong>{bookingCount}</strong> / 20
+              </p>
+            </div>
           )}
 
-          <button
-            style={{ marginTop: 20 }}
-            onClick={async () => {
-              if (selectedDate && selectedTime) {
-                const response = await fetch('http://localhost:3001/bookings', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                    classType: selectedClass,
-                    date: selectedDate.toISOString().split('T')[0],
-                    time: selectedTime,
-                    name: "Nombre de prueba", // Reemplazar si tenés login
-                    email: "demo@email.com"
-                  })
-                });
+          <div className="d-grid mb-3">
+            <button
+              className="btn btn-success"
+              onClick={handleReserve}
+              disabled={loadingUser}
+            >
+              Reservar
+            </button>
+          </div>
 
-                const data = await response.json();
-                if (response.ok) {
-                  alert(data.message || 'Reserva registrada con éxito');
-                  setBookingCount(prev => prev + 1);
-                } else {
-                  alert(data.message || 'Error al registrar reserva');
-                }
-              }
-            }}
-          >
-            Reservar
-          </button>
+          
         </>
       )}
     </div>
