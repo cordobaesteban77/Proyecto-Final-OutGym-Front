@@ -7,7 +7,7 @@ import NotFoundScreen from "./pages/NotFoundScreen";
 import LoginScreen from "./pages/LoginScreen";
 import NavbarApp from "./components/NavbarApp";
 import AdminPage from "./pages/AdminPage.jsx";
-import AdministrarUsuariosApp from "./components/AdministrarUsuariosApp.jsx";
+
 
 const App = () => {
   return (
@@ -18,9 +18,9 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/about" element={<SobreNosotros />} />
-          <Route path="/adminPage" element={<AdministrarUsuariosApp />} />
+          <Route path="/adminPage" element={<AdminPage/>} />
           <Route path="*" element={<NotFoundScreen />} />
-          <Route path="/adminpage" element={<AdminPage/>}/>
+          
         </Routes>
         <Footer />
       </BrowserRouter>

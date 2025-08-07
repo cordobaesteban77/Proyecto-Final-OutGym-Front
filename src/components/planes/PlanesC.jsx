@@ -27,7 +27,7 @@ function PlanesC() {
   };
 
   return (
-    <div className="two-column-container">
+    <div className="two-column-container" id="planes">
 
       <div className="titles-column">
         <h2 className="planes-title">NUESTROS PLANES</h2>

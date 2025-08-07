@@ -42,8 +42,8 @@ const handleLogout = () => {
           <NavLink className={({isActive}) => isActive ? "nav-link color-activo" : "nav-link text-light"} aria-current="page" to="/">Inicio</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className={({isActive}) => isActive ? "nav-link color-activo" : "nav-link text-light"} aria-current="page" to="/">Planes</NavLink>
-        </li>
+  <a href="#planes" className="nav-link text-light">Planes</a>
+</li>
         <li className="nav-item">
           <NavLink className={({isActive}) => isActive ? "nav-link color-activo" : "nav-link text-light"} aria-current="page" to="/">Contacto</NavLink>
         </li>
@@ -52,7 +52,7 @@ const handleLogout = () => {
         </li>
         {
           usuario && usuario.rolUsuario === "admin" ? <li className="nav-item">
-          <NavLink className={({isActive}) => isActive ? "nav-link color-activo" : "nav-link text-light"} aria-current="page" to="/">Admin</NavLink>
+          <NavLink className={({isActive}) => isActive ? "nav-link color-activo" : "nav-link text-light"} aria-current="page" to="/adminpage">Admin</NavLink>
         </li> : ""
         }
       </ul>

@@ -2,6 +2,7 @@
 import AdminPanel from '../components/AdminPanel';
 import React, { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import AdministrarUsuariosApp from '../components/AdministrarUsuariosApp';
 
 
 const AdminPage = () => {
@@ -74,6 +75,7 @@ const AdminPage = () => {
         Bienvenido{nombreUsuario ? `, ${nombreUsuario}` : ''}
       </h1>
   <AdminPanel />
+  <AdministrarUsuariosApp/>
 </div>
 
     </div>
