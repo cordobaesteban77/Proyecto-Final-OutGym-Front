@@ -4,7 +4,7 @@ import logo_outgym from "../assets/logo_outgym.png";
 
 const Footer = () => {
   return (
-    <footer className="footer d-flex align-items-center">
+    <footer className="footer d-flex align-items-center" style={{ zIndex: 2, position: 'relative' }}>
       <div className="footer-container">
         <div className="footer-row">
           <div className="footer-col">

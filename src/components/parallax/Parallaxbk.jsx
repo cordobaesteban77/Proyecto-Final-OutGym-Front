@@ -5,7 +5,7 @@ const Parallaxbk = () => {
   return (
     <div className="parallax-container">
       <video autoPlay loop muted className="background-video">
-        <source src="/videos/GYM BK.mp4" type="video/mp4" />
+        <source src="/videos/GYM_BK.mp4" type="video/mp4" />
         Tu navegador no soporta el video.
       </video>
       <div className="contenido">
