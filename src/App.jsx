@@ -1,17 +1,14 @@
 import { useState } from "react";
 import Footer from "./components/footer.jsx";
 import SobreNosotros from "./components/Sobrenosotros.jsx";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  BrowserRouter,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, BrowserRouter, } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import NotFoundScreen from "./pages/NotFoundScreen";
 import LoginScreen from "./pages/LoginScreen";
 import NavbarApp from "./components/NavbarApp";
 import AdminPage from "./pages/AdminPage.jsx";
+import AdministrarUsuariosApp from "./components/AdministrarUsuariosApp.jsx";
+
 const App = () => {
   return (
     <>
@@ -21,6 +18,7 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/about" element={<SobreNosotros />} />
+          <Route path="/adminPage" element={<AdministrarUsuariosApp />} />
           <Route path="*" element={<NotFoundScreen />} />
           <Route path="/adminpage" element={<AdminPage/>}/>
         </Routes>

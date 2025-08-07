@@ -32,33 +32,36 @@ const handleLogout = () => {
   return (
     <nav className="navbar navbar-expand-lg nav" style={{zIndex: 2}}>
   <div className="container-fluid">
-    <Link className="navbar-brand text-light" to="/">Logo</Link>
+    <Link className="navbar-brand text-light" to="/"><img className='logo' src="/images/ICONOOUTGYMTRANSPARENTE.png" alt="logo" /></Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav">
         <li className="nav-item">
-          <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Planes</NavLink>
+          <NavLink className={({isActive}) => isActive ? "nav-link color-activo" : "nav-link text-light"} aria-current="page" to="/">Inicio</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Donde estamos</NavLink>
+          <NavLink className={({isActive}) => isActive ? "nav-link color-activo" : "nav-link text-light"} aria-current="page" to="/">Planes</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/">Planes</NavLink>
+          <NavLink className={({isActive}) => isActive ? "nav-link color-activo" : "nav-link text-light"} aria-current="page" to="/">Contacto</NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className={({isActive}) => isActive ? "nav-link color-activo" : "nav-link text-light"} aria-current="page" to="/about">Sobre nosotros</NavLink>
         </li>
         {
           usuario && usuario.rolUsuario === "admin" ? <li className="nav-item">
-          <NavLink className={({isActive}) => isActive ? "nav-link color-avtivo" : "nav-link text-light"} aria-current="page" to="/adminpage">Admin</NavLink>
+          <NavLink className={({isActive}) => isActive ? "nav-link color-activo" : "nav-link text-light"} aria-current="page" to="/">Admin</NavLink>
         </li> : ""
         }
       </ul>
         {
             usuario ? <li className="nav-item ms-auto ms-0">
-             <button className="btn btn-link nav-link color-avtivo ps-0" onClick={handleLogout}> Cerrar sesión </button>
+             <button className="btn btn-link nav-link color-activo ps-0" onClick={handleLogout}> Cerrar sesión </button>
             </li> : 
             <li className="nav-item ms-auto ms-0">
-            <NavLink className="nav-link color-avtivo ps-0" to="/login">Iniciar sesión</NavLink>
+            <NavLink className="nav-link color-activo ps-0" to="/login">Iniciar sesión</NavLink>
             </li>
         }
     </div>
