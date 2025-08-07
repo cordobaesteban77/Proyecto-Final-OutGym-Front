@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const API_URL = "http://localhost:3001";
+const API_URL = "https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app";
 
 const AdministrarUsuariosApp = () => {
   const [usuarios, setUsuarios] = useState([]);

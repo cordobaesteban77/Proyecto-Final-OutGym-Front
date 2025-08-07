@@ -51,7 +51,7 @@ const AdminPage = () => {
         const idUsuario = decoded.idUsuario;
 
         axios
-          .get(`http://localhost:3001/usuarios/${idUsuario}`, {
+          .get(`https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app/usuarios/${idUsuario}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

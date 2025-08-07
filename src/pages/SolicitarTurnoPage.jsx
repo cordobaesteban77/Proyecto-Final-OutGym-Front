@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import ClassBooking from '../components/ClassBooking'
+import ClassBooking from '../components/ClassBooking';
 
 const SolicitarTurnoPage = () => {
   const navigate = useNavigate(); 
