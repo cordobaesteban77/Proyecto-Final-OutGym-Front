@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import ClassBooking from '../components/ClassBooking'
 
 const SolicitarTurnoPage = () => {
-  const navigate = useNavigate(); // <-- Agregado aquí
+  const navigate = useNavigate(); 
 
   const volverInicio = () => {
     navigate('/');

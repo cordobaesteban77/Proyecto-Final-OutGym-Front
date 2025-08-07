@@ -14,8 +14,8 @@ export const fetchProductoPorId = async (id) => {
 
 export const crearProducto = async (nuevoProducto) => {
   const { data } = await axios.post(API_URL, nuevoProducto);
-  console.log("Respuesta al crear producto:", data); // DEBUG
-  return data; // Debe tener msg e idProducto
+  console.log("Respuesta al crear producto:", data); 
+  return data; 
 };
 
 export const subirImagenProducto = async (idProducto, file) => {

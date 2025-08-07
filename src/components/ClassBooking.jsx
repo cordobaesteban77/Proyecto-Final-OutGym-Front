@@ -125,7 +125,7 @@ const ClassBooking = () => {
           time: selectedTime,
           name: nombreUsuario,
           email: emailUsuario,
-          userId: idUsuario // Este es el id que se guarda en el modelo
+          userId: idUsuario 
         });
         Swal.fire('¡Éxito!', response.data.message || 'Reserva registrada con éxito', 'success');
         setBookingCount(prev => prev + 1);

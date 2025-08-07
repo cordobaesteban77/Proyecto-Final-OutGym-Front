@@ -12,7 +12,7 @@ const AdminPage = () => {
   const [nombreUsuario, setNombreUsuario] = useState('');
   const [productos, setProductos] = useState([]);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
-  const [productoEditando, setProductoEditando] = useState(null); // ✅ producto a editar
+  const [productoEditando, setProductoEditando] = useState(null); 
 
   const cargarProductos = async () => {
     const lista = await fetchProductos();
@@ -24,7 +24,7 @@ const AdminPage = () => {
   }, []);
 
   const handleAgregar = () => {
-    setProductoEditando(null); // 👈 aseguramos que sea alta nueva
+    setProductoEditando(null); 
     setMostrarFormulario(true);
   };
 
@@ -119,12 +119,12 @@ const AdminPage = () => {
             productos={productos}
             onEliminar={handleEliminar}
             onToggleEstado={handleToggleEstado}
-            onEditar={handleEditar} // ✅ pasamos handler para editar
+            onEditar={handleEditar}
           />
 
           {mostrarFormulario && (
             <FormularioProducto
-              producto={productoEditando} // ✅ pasamos producto si es edición
+              producto={productoEditando} 
               onClose={() => {
                 setMostrarFormulario(false);
                 setProductoEditando(null);
