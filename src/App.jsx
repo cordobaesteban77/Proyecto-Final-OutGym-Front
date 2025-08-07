@@ -16,7 +16,7 @@ import ContactoC from "./components/contacto/ContactoC.jsx";
 import SolicitarTurnoPage from "./pages/SolicitarTurnoPage.jsx";
 import MisClasesUser from "./pages/MisClasesUser.jsx";
 import SobreNosotros from "./components/Sobrenosotros.jsx";
-import Footer from "./components/footer.jsx";
+import Footer from './components/Footer.jsx'
 
 const App = () => {
   return (
