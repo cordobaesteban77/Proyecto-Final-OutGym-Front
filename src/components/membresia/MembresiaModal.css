@@ -1,0 +1,205 @@
+/* Estilos base */
+.membership-jumbotron {
+  width: 100%;
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+}
+
+.jumbotron-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+/* Columna izquierda */
+.membership-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.membership-subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  color: #06283d;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.membership-title {
+  font-size: 4rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  color: #1363df;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin: 0;
+  line-height: 1;
+}
+
+/* Columna derecha */
+.jumbotron-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.jumbotron-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: #06283d;
+}
+
+.jumbotron-button {
+  background-color: transparent;
+  color: #06283d;
+  border: 2px solid #06283d;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  border-radius: 4px;
+}
+
+.jumbotron-button:hover {
+  background-color: #06283d;
+  color: white;
+}
+
+/* Modal */
+.membership-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.membership-modal-content {
+  background-color: rgba(6, 40, 61, 0.95);
+  padding: 3rem;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+  border: 2px solid #1363df;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.modal-logo {
+  max-width: 200px;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.modal-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #1363df;
+  text-transform: uppercase;
+}
+
+.modal-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: #dff6ff;
+}
+
+.modal-close-button {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 10px 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.modal-close-button:hover {
+  background-color: white;
+  color: #06283d;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .membership-title {
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .jumbotron-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .membership-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .membership-subtitle {
+    font-size: 1.3rem;
+  }
+
+  .jumbotron-content {
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .jumbotron-button {
+    align-self: center;
+  }
+
+  .membership-modal-content {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .membership-jumbotron {
+    padding: 2rem 1rem;
+  }
+
+  .membership-title {
+    font-size: 2.5rem;
+    letter-spacing: 0.3rem;
+  }
+
+  .membership-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .modal-logo {
+    max-width: 150px;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+  }
+
+  .modal-description {
+    font-size: 1rem;
+  }
+}

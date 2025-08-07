@@ -1,0 +1,82 @@
+/* Archivo Parallaxbk.css */
+.parallax-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.contenido {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: white;
+}
+
+.titulo {
+  font-size: clamp(4rem, 15vw, 10rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  width: 100%;
+  text-align: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  transform: scaleY(1.1);
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7); /* Letras con transparencia */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  mix-blend-mode: overlay; /* Mezcla con el video */
+}
+
+.subtitulo {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-top: 1rem;
+  color: rgba(19, 99, 223, 0.85); /* Color #1363DF con transparencia */
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+/* Responsividad específica para el título */
+@media (max-width: 768px) {
+  .titulo {
+    font-size: clamp(3rem, 12vw, 8rem);
+    letter-spacing: -0.03em;
+    white-space: normal;
+    opacity: 0.8;
+  }
+
+  .subtitulo {
+    font-size: clamp(1.3rem, 3.5vw, 2rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .titulo {
+    font-size: clamp(2rem, 10vw, 6rem);
+    padding: 0 15px;
+    color: rgba(255, 255, 255, 0.8); /* Más opaco en móviles */
+  }
+
+  .subtitulo {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    margin-top: 0.8rem;
+    color: rgba(19, 99, 223, 0.9); /* Menos transparencia en móviles */
+  }
+}
