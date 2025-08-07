@@ -58,7 +58,7 @@ const ClasesUsuarios = () => {
         });
 
         Swal.fire('Eliminado', 'La clase ha sido eliminada.', 'success');
-        // Recargar reservas
+        
         fetchUserBookings();
       } catch (err) {
         console.error(err);

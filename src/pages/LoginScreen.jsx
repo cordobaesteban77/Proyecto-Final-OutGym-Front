@@ -130,7 +130,7 @@ const LoginScreen = () => {
         </div>
       </div>
 
-      {/* MODAL DE REGISTRO */}
+      {}
        {showModal && (
         <div className="modal d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}>
           <div className="modal-dialog">
