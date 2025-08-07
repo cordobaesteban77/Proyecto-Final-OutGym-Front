@@ -33,7 +33,10 @@ const LoginScreen = () => {
       const { data } = await axios.post('https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app/usuarios/login', {
         nombreUsuario: datos.nombreUsuario,
         password: datos.password
-      })
+      },
+    {
+    withCredentials: true
+  })
       localStorage.setItem("token", data.token)
       MySwal.fire({
         title: "¡Bienvenido!",
