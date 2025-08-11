@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const API_URL = "http://localhost:3001";
+const API_URL = `${import.meta.env.VITE_URL_SERVER}`;
 
 const AdministrarUsuariosApp = () => {
   const [usuarios, setUsuarios] = useState([]);

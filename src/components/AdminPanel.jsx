@@ -11,7 +11,7 @@ const AdminPanel = () => {
   
 
   useEffect(() => {
-    fetch('http://localhost:3001/bookings')
+    fetch(`${import.meta.env.VITE_URL_SERVER}/bookings`)
       .then((res) => res.json())
       .then((data) => setBookings(data))
       .catch((err) => console.error('Error al obtener turnos:', err));
@@ -31,7 +31,7 @@ const AdminPanel = () => {
 
   if (result.isConfirmed) {
     try {
-      await fetch(`http://localhost:3001/bookings/${id}`, {
+      await fetch(`${import.meta.env.VITE_URL_SERVER}/bookings/${id}`, {
         method: 'DELETE',
       });
       setBookings(bookings.filter((booking) => booking._id !== id));

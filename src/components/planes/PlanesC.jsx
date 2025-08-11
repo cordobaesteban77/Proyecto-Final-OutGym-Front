@@ -5,7 +5,7 @@ import "./PlanesC.css";
 function PlanesC() {
   const pagarPlan = async (nombre, precio) => {
     try {
-      const res = await fetch("http://localhost:3001/api/carrito/pagarCarritoMp", {
+      const res = await fetch(`${import.meta.env.VITE_URL_SERVER}/api/carrito/pagarCarritoMp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre, precio }) // Se envía al backend

@@ -30,7 +30,7 @@ const LoginScreen = () => {
 
   const logIn = async (datos) => {
     try {
-      const { data } = await axios.post('http://localhost:3001/usuarios/login', {
+      const { data } = await axios.post(`${import.meta.env.VITE_URL_SERVER}/usuarios/login`, {
         nombreUsuario: datos.nombreUsuario,
         password: datos.password
       })
@@ -55,7 +55,7 @@ const LoginScreen = () => {
 
   const registerUser = async (datos) => {
     try {
-      await axios.post('http://localhost:3001/usuarios/', {
+      await axios.post(`${import.meta.env.VITE_URL_SERVER}/usuarios/`, {
         nombreUsuario: datos.nombreUsuario,
         emailUsuario: datos.emailUsuario,
         password: datos.password

@@ -66,7 +66,7 @@ const TablaProductos = ({
               </td>
               <td>
                 <img
-                  src={`http://localhost:3001/uploads/${prod.imagen}`}
+                  src={`${import.meta.env.VITE_URL_SERVER}/uploads/${prod.imagen}`}
                   style={{
                     width: "60px",
                     height: "60px",

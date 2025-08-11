@@ -51,7 +51,7 @@ const AdminPage = () => {
         const idUsuario = decoded.idUsuario;
 
         axios
-          .get(`http://localhost:3001/usuarios/${idUsuario}`, {
+          .get(`${import.meta.env.VITE_URL_SERVER}/usuarios/${idUsuario}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
