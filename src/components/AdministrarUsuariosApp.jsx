@@ -104,7 +104,9 @@ const AdministrarUsuariosApp = () => {
           </div>
           <div className="mb-3">
             <label className="form-label">Rol del Usuario</label>
-            <select
+            {
+              formData.rolUsuario === "admin" ? <h3 className="text-danger">No es posible cambiarle el rol a un admin</h3> :
+              <select
               className="form-select"
               name="rolUsuario"
               value={formData.rolUsuario}
@@ -114,6 +116,7 @@ const AdministrarUsuariosApp = () => {
               <option value="usuario">usuario</option>
               <option value="admin">admin</option>
             </select>
+            }
           </div>
           <button type="submit" className="btn btn-success">Actualizar</button>
           <button
@@ -142,7 +145,10 @@ const AdministrarUsuariosApp = () => {
             </div>
             <div>
               <button className="btn btn-sm btn-primary me-2" onClick={() => handleEditar(user)}>Editar</button>
-              <button className="btn btn-sm btn-danger" onClick={() => handleEliminar(user._id)}>Eliminar</button>
+              {
+                user.rolUsuario === "admin" ? <button className="btn btn-sm btn-danger disabled" onClick={() => handleEliminar(user._id)}>Eliminar</button>
+                : <button className="btn btn-sm btn-danger" onClick={() => handleEliminar(user._id)}>Eliminar</button>
+              }
             </div>
           </li>
         ))}
