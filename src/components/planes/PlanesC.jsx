@@ -1,20 +1,38 @@
+import { useEffect, useState } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 import "./PlanesC.css";
 
 function PlanesC() {
+  const [planes, setPlanes] = useState([]);
+
+  // 🔹 Traer los productos desde el backend
+  useEffect(() => {
+    const fetchPlanes = async () => {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_URL_SERVER}/api/productos`);
+        const data = await res.json();
+        setPlanes(data.productos || []);
+      } catch (error) {
+        console.error("Error al cargar los planes:", error);
+      }
+    };
+
+    fetchPlanes();
+  }, []);
+
+  // 🔹 Función para pagar
   const pagarPlan = async (nombre, precio) => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_URL_SERVER}/api/carrito/pagarCarritoMp`, {
+      const res = await fetch(`${import.meta.env.VITE_URL_SERVER}/api/carrito/pagarPlanMp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, precio }) // Se envía al backend
+        body: JSON.stringify({ nombre, precio }),
       });
 
       const data = await res.json();
 
       if (data.init_point) {
-        // Redirige a Mercado Pago
         window.location.href = data.init_point;
       } else {
         console.error("Error al generar pago:", data);
@@ -28,7 +46,6 @@ function PlanesC() {
 
   return (
     <div className="two-column-container" id="planes">
-
       <div className="titles-column">
         <h2 className="planes-title">NUESTROS PLANES</h2>
         <p className="planes-subtitle">
@@ -36,68 +53,26 @@ function PlanesC() {
         </p>
       </div>
 
- 
       <div className="accordion-column">
         <Accordion defaultActiveKey="0" flush>
-        
-          <Accordion.Item eventKey="0">
-            <Accordion.Header>PLAN BLACK</Accordion.Header>
-            <Accordion.Body>
-              <div className="plan-content">
-                <p>
-                  ¡Entrena sin límites! Disfruta de acceso ilimitado al sector
-                  de musculación y máquinas sin restricción de horario.
-                </p>
-                <Button
-                  variant="dark"
-                  className="subscribe-btn"
-                  onClick={() => pagarPlan("Plan Black", 5000)}
-                >
-                  Quiero el Plan Black!
-                </Button>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-  
-          <Accordion.Item eventKey="1">
-            <Accordion.Header>PLAN CLASS</Accordion.Header>
-            <Accordion.Body>
-              <div className="plan-content">
-                <p>
-                  ¡Entrena a tu ritmo! Reserva tus clases favoritas según tu
-                  disponibilidad.
-                </p>
-                <Button
-                  variant="primary"
-                  className="subscribe-btn"
-                  onClick={() => pagarPlan("Plan Class", 3000)}
-                >
-                  Quiero el Plan Class!
-                </Button>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-    
-          <Accordion.Item eventKey="2">
-            <Accordion.Header>PLAN GOLD</Accordion.Header>
-            <Accordion.Body>
-              <div className="plan-content">
-                <p>
-                  Acceso ilimitado a todas las instalaciones y servicios del
-                  gimnasio, incluyendo clases ilimitadas.
-                </p>
-                <Button
-                  variant="warning"
-                  className="subscribe-btn"
-                  onClick={() => pagarPlan("Plan Gold", 7000)}
-                >
-                  Quiero el Plan Gold!
-                </Button>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
+          {planes.map((plan, index) => (
+            <Accordion.Item eventKey={index.toString()} key={plan._id}>
+              <Accordion.Header>{plan.nombre}</Accordion.Header>
+              <Accordion.Body>
+                <div className="plan-content">
+                  <p>{plan.descripcion}</p>
+                  <p><strong>Precio: ${plan.precio}</strong></p>
+                  <Button
+                    variant="dark"
+                    className="subscribe-btn"
+                    onClick={() => pagarPlan(plan.nombre, plan.precio)}
+                  >
+                    ¡Quiero este plan!
+                  </Button>
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
+          ))}
         </Accordion>
       </div>
     </div>
@@ -105,4 +80,5 @@ function PlanesC() {
 }
 
 export default PlanesC;
+
 
