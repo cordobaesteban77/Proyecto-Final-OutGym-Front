@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 import "./PlanesC.css";

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./MembresiaModal.css";
 
 const MembresiaModal = () => {
@@ -29,7 +30,7 @@ const MembresiaModal = () => {
               ¿Qué incluye?
             </button>
             <button className="jumbotron-button inverse-button">
-              ¡Quiero la Membresía!
+              <Link to="/*">¡Quiero la Membresía!</Link>
             </button>
           </div>
         </div>
