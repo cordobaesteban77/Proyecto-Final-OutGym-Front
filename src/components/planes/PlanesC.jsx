@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 import "./PlanesC.css";
 
 function PlanesC() {
   const [planes, setPlanes] = useState([]);
+  const token = localStorage.getItem("token");
+  let usuario = null;
 
   // 🔹 Traer los productos desde el backend
   useEffect(() => {
@@ -20,6 +24,14 @@ function PlanesC() {
 
     fetchPlanes();
   }, []);
+
+   if (token) {
+      try {
+        usuario = jwtDecode(token);
+      } catch (error) {
+        console.error("Token inválido", error);
+      }
+    }
 
   // 🔹 Función para pagar
   const pagarPlan = async (nombre, precio) => {
@@ -62,13 +74,18 @@ function PlanesC() {
                 <div className="plan-content">
                   <p>{plan.descripcion}</p>
                   <p><strong>Precio: ${plan.precio}</strong></p>
-                  <Button
+                  {
+                    usuario ? <Button
                     variant="dark"
                     className="subscribe-btn"
                     onClick={() => pagarPlan(plan.nombre, plan.precio)}
                   >
                     ¡Quiero este plan!
-                  </Button>
+                  </Button> : 
+                 <NavLink className="nav-link subscribe-btn text-light" to="/login">
+                Iniciar sesión para elegir plan
+              </NavLink>
+                  }
                 </div>
               </Accordion.Body>
             </Accordion.Item>
