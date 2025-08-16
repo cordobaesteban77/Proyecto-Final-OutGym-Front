@@ -24,6 +24,7 @@ const NavbarApp = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    window.dispatchEvent(new Event("authChanged"))
     navigate("/");
     MySwal.fire({
       title: "¡Adios!",
