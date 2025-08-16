@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 import "./GymJumbotron.css";
 
 const GymJumbotron = () => {
@@ -25,7 +26,7 @@ const GymJumbotron = () => {
             1000m² incluyen zona de cardio, pesas libres, máquinas de
             resistencia y área funcional.
           </p>
-          <button className="jumbotron-button">Conoce más</button>
+          <Link to="/*" className="membresia-boton"><button className="jumbotron-button">Conoce más</button></Link>
         </div>
       </div>
     </div>

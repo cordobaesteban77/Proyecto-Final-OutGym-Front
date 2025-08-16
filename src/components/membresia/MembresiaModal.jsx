@@ -29,9 +29,7 @@ const MembresiaModal = () => {
             <button className="jumbotron-button" onClick={handleOpenModal}>
               ¿Qué incluye?
             </button>
-            <button className="jumbotron-button inverse-button">
-              <Link to="/*">¡Quiero la Membresía!</Link>
-            </button>
+            <Link to="/*" className="membresia-boton"><button className="jumbotron-button inverse-button">¡Quiero la Membresía!</button></Link>
           </div>
         </div>
       </div>
