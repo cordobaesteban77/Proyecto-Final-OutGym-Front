@@ -35,6 +35,7 @@ const LoginScreen = () => {
         password: datos.password
       })
       localStorage.setItem("token", data.token)
+      window.dispatchEvent(new Event("authChanged"));
       MySwal.fire({
         title: "¡Bienvenido!",
         text: data.msg,

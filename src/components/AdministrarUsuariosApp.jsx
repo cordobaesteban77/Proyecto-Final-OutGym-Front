@@ -137,7 +137,7 @@ const AdministrarUsuariosApp = () => {
           <li key={user._id} className="list-group-item d-flex justify-content-between align-items-center">
             <div>
               <strong>{user.nombreUsuario}</strong> - {user.emailUsuario}
-              <div className="text-muted">Plan: {user.planContratado || "Ninguno"}</div>
+              <div className="text-muted">Plan: {user.plan || "Ninguno"}</div>
               <div className="text-muted">Rol: {user.rolUsuario || "usuario"}</div>
             </div>
             <div>
