@@ -127,11 +127,12 @@ body {
 }
 
 .card-title {
-  font-size: clamp(1.5rem, 3vw, 2rem); /* Ajustado para mejor escalado */
+  font-size: clamp(1.5rem, 3vw, 4rem); /* Ajustado para mejor escalado */
   font-weight: 700;
-  color: #1363df;
+  color: white;
   margin-bottom: 1rem;
   user-select: none;
+  text-shadow: 0px 0px 5px rgba(8, 8, 8, 0.7);
 }
 
 .card-info {
@@ -145,17 +146,18 @@ body {
 /* Botón Entrar */
 .enter-button {
   background-color: transparent;
-  color: #06283d;
-  font-size: clamp(1.1rem, 1.8vw, 1.5rem); /* Ajustado para mejor escalado */
+  color: #06283d; /* Mantenemos el color */
+  font-size: clamp(1.5rem, 2.8vw, 2.5rem);
   font-weight: bold;
-  opacity: 0.5;
+  opacity: 1; /* Cambiamos a opacidad completa */
   border: none;
   cursor: pointer;
   padding: 12px 0;
   width: 80%;
   margin: 0 auto;
   border-radius: 0;
-  transition: opacity 0.2s ease;
+  transition: all 0.2s ease; /* Ampliamos la transición para todos los cambios */
+  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.7); /* Sombra blanca para destacar en fondos oscuros */
 }
 
 .enter-button:hover {
@@ -364,5 +366,265 @@ body {
     100% {
       left: 0;
     }
+  }
+}
+
+/* Estilos para el modal - CORREGIDOS LOS Z-INDEX */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(6, 40, 61, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000; /* Aumentado significativamente */
+  padding: 20px;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  border: 1px solid #06283d;
+  z-index: 10001; /* Mayor que el overlay */
+
+  .modal-title {
+    color: #06283d;
+  }
+}
+
+.modal-body {
+  position: relative;
+  z-index: 10002; /* Mayor que el contenido del modal */
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #06283d;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10005; /* Mayor que todos los elementos del modal */
+}
+
+.modal-close-btn:hover {
+  background-color: rgba(6, 40, 61, 0.1);
+  transform: scale(1.1);
+}
+
+.modal-title {
+  color: #06283d;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.2rem;
+  border-bottom: 2px solid #06283d;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.modal-subtitle {
+  color: #06283d;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  border-left: 4px solid #06283d;
+  padding-left: 10px;
+  position: relative;
+}
+
+.modal-description {
+  color: #06283d;
+  background-color: #051c29;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  border-left: 4px solid #06283d;
+  padding-left: 10px;
+  position: relative;
+}
+
+.modal-list {
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 10004; /* Mayor que la descripción */
+}
+
+.modal-list-item {
+  display: flex;
+  margin-bottom: 15px;
+  align-items: flex-start;
+}
+
+.modal-list-number {
+  background-color: #06283d;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  flex-shrink: 0;
+  font-weight: bold;
+}
+
+.modal-list-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-list-content strong {
+  color: #06283d;
+  margin-bottom: 5px;
+}
+
+.modal-list-content span {
+  color: #2c3e50;
+  line-height: 1.5;
+}
+
+.modal-benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 10004; /* Mayor que la descripción */
+}
+
+.modal-benefit-category {
+  background-color: rgba(6, 40, 61, 0.05);
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 3px solid #06283d;
+}
+
+.modal-benefit-category h4 {
+  color: #06283d;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.modal-benefit-category p {
+  color: #2c3e50;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.modal-back-btn {
+  background-color: #06283d;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+  width: 200px;
+  position: relative;
+  z-index: 10004; /* Mayor que la descripción */
+}
+
+.modal-back-btn:hover {
+  background-color: #051c29;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Contenedor para el icono */
+.modal-icon-container {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+  width: 100%;
+  position: relative;
+  z-index: 10004; /* Mayor que la descripción */
+}
+
+.modal-icon {
+  width: 50%;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Contenedor de ancho completo para el icono */
+.modal-fullwidth-container {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(135deg, #06283d 0%, #2a6b8a 100%);
+  padding: 15px 0;
+  z-index: 10004; /* Mayor que la descripción */
+}
+
+.modal-fullwidth-icon {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 20px;
+    margin: 10px;
+  }
+
+  .modal-title {
+    font-size: 1.8rem;
+  }
+
+  .modal-subtitle {
+    font-size: 1.3rem;
+  }
+
+  .modal-benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-fullwidth-icon {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-fullwidth-container {
+    padding: 10px 0;
+  }
+
+  .modal-fullwidth-icon {
+    max-width: 150px;
   }
 }

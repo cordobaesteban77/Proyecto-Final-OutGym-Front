@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {jwtDecode} from "jwt-decode"; 
+import { jwtDecode } from "jwt-decode";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
@@ -9,13 +9,13 @@ import "./PlanesC.css";
 function PlanesC() {
   const [planes, setPlanes] = useState([]);
   const [usuario, setUsuario] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("token")); 
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const location = useLocation();
   const navigate = useNavigate();
 
   const actualizarUsuario = () => {
     const tokenActual = localStorage.getItem("token");
-    setToken(tokenActual); 
+    setToken(tokenActual);
     if (tokenActual) {
       try {
         const decoded = jwtDecode(tokenActual);
@@ -48,7 +48,9 @@ function PlanesC() {
   useEffect(() => {
     const fetchPlanes = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_URL_SERVER}/api/productos`);
+        const res = await fetch(
+          `${import.meta.env.VITE_URL_SERVER}/api/productos`
+        );
         const data = await res.json();
         setPlanes(data.productos || []);
       } catch (error) {
@@ -65,10 +67,13 @@ function PlanesC() {
       if (!usuario || !usuario.id || !planIdComprado) return;
 
       try {
-        await axios.put(`${import.meta.env.VITE_URL_SERVER}/usuarios/comprarPlan`, {
-          idUsuario: usuario.id,
-          nombre: planIdComprado,
-        });
+        await axios.put(
+          `${import.meta.env.VITE_URL_SERVER}/usuarios/comprarPlan`,
+          {
+            idUsuario: usuario.id,
+            nombre: planIdComprado,
+          }
+        );
         params.delete("planId");
         navigate({ search: params.toString() }, { replace: true });
       } catch (error) {
@@ -80,15 +85,22 @@ function PlanesC() {
   }, [location.search, usuario, navigate]);
   const pagarPlan = async (nombre, precio, idPlan) => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_URL_SERVER}/api/carrito/pagarPlanMp`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, precio, back_urls: {
-          success: `https://localhost:3001/planes?planId=${idPlan}`,
-          failure: "http://localhost:3000/pago-fallido",
-          pending: "http://localhost:3000/pago-pendiente"
-        }}),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_URL_SERVER}/api/carrito/pagarPlanMp`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            nombre,
+            precio,
+            back_urls: {
+              success: `https://localhost:3001/planes?planId=${idPlan}`,
+              failure: "http://localhost:3000/pago-fallido",
+              pending: "http://localhost:3000/pago-pendiente",
+            },
+          }),
+        }
+      );
 
       const data = await res.json();
 
@@ -108,7 +120,9 @@ function PlanesC() {
     <div className="two-column-container" id="planes">
       <div className="titles-column">
         <h2 className="planes-title">NUESTROS PLANES</h2>
-        <p className="planes-subtitle">Elige el que mejor se adapte a tus necesidades</p>
+        <p className="planes-subtitle">
+          Elige el que mejor se adapte a tus necesidades
+        </p>
       </div>
 
       <div className="accordion-column">
@@ -126,12 +140,17 @@ function PlanesC() {
                     <Button
                       variant="dark"
                       className="subscribe-btn"
-                      onClick={() => pagarPlan(plan.nombre, plan.precio, plan._id)}
+                      onClick={() =>
+                        pagarPlan(plan.nombre, plan.precio, plan._id)
+                      }
                     >
                       ¡Quiero este plan!
                     </Button>
                   ) : (
-                    <NavLink className="nav-link subscribe-btn text-light" to="/login">
+                    <NavLink
+                      className="nav-link subscribe-btn text-light"
+                      to="/login"
+                    >
                       Iniciar sesión para elegir plan
                     </NavLink>
                   )}
@@ -146,5 +165,3 @@ function PlanesC() {
 }
 
 export default PlanesC;
-
-
