@@ -146,7 +146,7 @@ body {
 /* Botón Entrar */
 .enter-button {
   background-color: transparent;
-  color: #06283d; /* Mantenemos el color */
+  color: white; /* Mantenemos el color */
   font-size: clamp(1.5rem, 2.8vw, 2.5rem);
   font-weight: bold;
   opacity: 1; /* Cambiamos a opacidad completa */
@@ -157,7 +157,7 @@ body {
   margin: 0 auto;
   border-radius: 0;
   transition: all 0.2s ease; /* Ampliamos la transición para todos los cambios */
-  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.7); /* Sombra blanca para destacar en fondos oscuros */
+  text-shadow: 0px 0px 5px rgba(8, 8, 8, 0.7); /* Sombra blanca para destacar en fondos oscuros */
 }
 
 .enter-button:hover {

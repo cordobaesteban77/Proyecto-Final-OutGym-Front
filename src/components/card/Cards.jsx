@@ -113,7 +113,7 @@ function CardHome() {
                   aria-label={`Entrar a ${title}`}
                   type="button"
                 >
-                  Entrar
+                  + info
                 </button>
 
                 <button
