@@ -47,6 +47,7 @@ const NavbarApp = () => {
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          style={{ filter: "invert(1)" }}
         >
           <span className="navbar-toggler-icon"></span>
         </button>

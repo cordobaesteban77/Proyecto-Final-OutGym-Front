@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Footer from "../components/footer.jsx";
+import Footer from "./components/footer.jsx";
 import SobreNosotros from "./components/Sobrenosotros.jsx";
 import {
   BrowserRouter as Router,
@@ -17,6 +17,8 @@ import AdminPage from "./pages/AdminPage.jsx";
 import ContactoC from "./components/contacto/ContactoC.jsx";
 import SolicitarTurnoPage from "./pages/SolicitarTurnoPage.jsx";
 import MisClasesUser from "./pages/MisClasesUser.jsx";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 
 const App = () => {
   return (
@@ -31,6 +33,8 @@ const App = () => {
             } />
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginScreen />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/about" element={<SobreNosotros />} />
           <Route path="/contact" element={<ContactoC />} />
           <Route path="/solicitarclase" element={<SolicitarTurnoPage/>}/>

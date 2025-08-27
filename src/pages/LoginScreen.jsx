@@ -88,6 +88,7 @@ const LoginScreen = () => {
             <form onSubmit={handleSubmit(logIn)}>
               <div className="mb-4 position-relative">
                 <label className="form-label text-light">Nombre de usuario</label>
+                 <i className="bi bi-person-fill input-icon mx-1" style={{ filter: "invert(1)" }}></i>
                 <input
                   type="text"
                   className="form-control form-control-lg ps-4"
@@ -97,10 +98,12 @@ const LoginScreen = () => {
                 {errors.nombreUsuario && (
                   <p role='alert' className='text-danger'>Este campo es obligatorio</p>
                 )}
-                <i className="bi bi-person-fill input-icon"></i>
+               
+
               </div>
               <div className="mb-4 position-relative">
                 <label className="form-label text-light">Contraseña</label>
+                 <i className="bi bi-lock-fill input-icon mx-1" style={{ filter: "invert(1)" }}></i>
                 <input
                   type="password"
                   className="form-control form-control-lg ps-4"
@@ -110,7 +113,7 @@ const LoginScreen = () => {
                 {errors.password && (
                   <p role='alert' className='text-danger'>Este campo es obligatorio</p>
                 )}
-                <i className="bi bi-lock-fill input-icon"></i>
+               
               </div>
               <button type="submit" className="btn btn-custom btn-lg w-100 mb-3 text-light custom-boton">
                 Iniciar sesión
@@ -125,6 +128,16 @@ const LoginScreen = () => {
                   Regístrate
                 </button>
               </div>
+              <div className="text-center mt-3">
+  <button
+    type="button"
+    className="btn btn-link text-purple fw-bold text-decoration-none"
+    onClick={() => navigate("/forgot-password")}
+  >
+    ¿Olvidaste tu contraseña?
+  </button>
+</div>
+
             </form>
           </div>
         </div>
