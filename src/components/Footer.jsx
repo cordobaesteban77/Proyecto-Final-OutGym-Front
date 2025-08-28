@@ -21,13 +21,13 @@ const Footer = () => {
           <div className="footer-col">
             <ul className="footer-contact ">
               <li>
-                <i className="bi bi-whatsapp"></i> 54 381 5 568 459
+                <Link to="*"><i className="bi bi-whatsapp"></i> 54 381 5 568 459</Link>
               </li>
               <li>
-                <i className="bi bi-instagram"></i> @outgymtuc
+                <Link to="*"><i className="bi bi-instagram"></i> @outgymtuc</Link>
               </li>
               <li>
-                <i className="bi bi-globe"></i> www.outgymtuc.com.ar
+                <Link to="*"><i className="bi bi-globe"></i> www.outgymtuc.com.ar</Link>
               </li>
             </ul>
           </div>
