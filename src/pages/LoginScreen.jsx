@@ -30,11 +30,7 @@ const LoginScreen = () => {
 
   const logIn = async (datos) => {
     try {
-<<<<<<< HEAD
-      const { data } = await axios.post('https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app/usuarios/login', {
-=======
       const { data } = await axios.post(`${import.meta.env.VITE_URL_SERVER}/usuarios/login`, {
->>>>>>> de6cd67256adf42712549178c3e71853649d0fb3
         nombreUsuario: datos.nombreUsuario,
         password: datos.password
       })
@@ -60,11 +56,7 @@ const LoginScreen = () => {
 
   const registerUser = async (datos) => {
     try {
-<<<<<<< HEAD
-      await axios.post('https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app/usuarios/', {
-=======
       await axios.post(`${import.meta.env.VITE_URL_SERVER}/usuarios/`, {
->>>>>>> de6cd67256adf42712549178c3e71853649d0fb3
         nombreUsuario: datos.nombreUsuario,
         emailUsuario: datos.emailUsuario,
         password: datos.password

@@ -9,7 +9,7 @@ const ForgotPassword = () => {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post("http://localhost:3001/usuarios/forgot-password", {
+      await axios.post(`${import.meta.env.VITE_URL_SERVER}/usuarios/forgot-password`, {
         emailUsuario: data.emailUsuario,
       });
       Swal.fire("Éxito", "Te enviamos un correo para recuperar tu contraseña", "success");

@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-<<<<<<< HEAD
-const API_URL = "https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app";
-=======
 const API_URL = `${import.meta.env.VITE_URL_SERVER}`;
->>>>>>> de6cd67256adf42712549178c3e71853649d0fb3
 
 const AdministrarUsuariosApp = () => {
   const [usuarios, setUsuarios] = useState([]);
