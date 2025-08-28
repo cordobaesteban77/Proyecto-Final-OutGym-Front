@@ -20,6 +20,9 @@ import MisClasesUser from "./pages/MisClasesUser.jsx";
 import PagoExitoso from "./pages/PagoExitoso.jsx";
 import PagoFallido from "./pages/PagoFallido.jsx";
 import PagoPendiente from "./pages/PagoPendiente.jsx";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
+
 
 const App = () => {
   return (
@@ -34,6 +37,8 @@ const App = () => {
             } />
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginScreen />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/about" element={<SobreNosotros />} />
           <Route path="/contact" element={<ContactoC />} />
           <Route path="/solicitarclase" element={<SolicitarTurnoPage/>}/>
