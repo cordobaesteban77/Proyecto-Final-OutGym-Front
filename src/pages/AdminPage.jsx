@@ -51,7 +51,11 @@ const AdminPage = () => {
         const idUsuario = decoded.idUsuario;
 
         axios
+<<<<<<< HEAD
           .get(`https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app/usuarios/${idUsuario}`, {
+=======
+          .get(`${import.meta.env.VITE_URL_SERVER}/usuarios/${idUsuario}`, {
+>>>>>>> de6cd67256adf42712549178c3e71853649d0fb3
             headers: {
               Authorization: `Bearer ${token}`,
             },

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -17,9 +17,14 @@ const NavbarApp = () => {
       console.error("Token inválido", error);
     }
   }
+  
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    window.dispatchEvent(new Event("authChanged"))
     navigate("/");
     MySwal.fire({
       title: "¡Adios!",
@@ -47,6 +52,7 @@ const NavbarApp = () => {
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          style={{ filter: "invert(1)" }}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -63,11 +69,13 @@ const NavbarApp = () => {
                 Inicio
               </NavLink>
             </li>
-            <li className="nav-item">
+           {
+            isHome ?  <li className="nav-item">
               <a href="#planes" className="nav-link text-light">
                 Planes
               </a>
-            </li>
+            </li> : ""
+           }
             
             {usuario && usuario.rolUsuario === "usuario" ? (
               <li className="nav-item">
@@ -81,8 +89,9 @@ const NavbarApp = () => {
                   Mis Clases
                 </NavLink>
               </li>
-            ) : (
-              <li className="nav-item">
+            ) : "" 
+            }
+            <li className="nav-item">
               <NavLink
                 className={({ isActive }) =>
                   isActive ? "nav-link color-activo" : "nav-link text-light"
@@ -93,7 +102,6 @@ const NavbarApp = () => {
                 Contacto
               </NavLink>
             </li>
-            )}
             {usuario && usuario.rolUsuario === "usuario" ? (
               <li className="nav-item">
                 <NavLink

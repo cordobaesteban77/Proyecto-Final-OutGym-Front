@@ -43,7 +43,11 @@ const ClassBooking = () => {
         setIdUsuario(decoded.idUsuario);
 
         axios
+<<<<<<< HEAD
           .get(`https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app/usuarios/${decoded.idUsuario}`, {
+=======
+          .get(`${import.meta.env.VITE_URL_SERVER}/usuarios/${decoded.idUsuario}`, {
+>>>>>>> de6cd67256adf42712549178c3e71853649d0fb3
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -92,7 +96,11 @@ const ClassBooking = () => {
       if (selectedClass && selectedDate && selectedTime) {
         try {
           const dateStr = selectedDate.toISOString().split('T')[0];
+<<<<<<< HEAD
           const res = await axios.get(`https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app/bookings/count`, {
+=======
+          const res = await axios.get(`${import.meta.env.VITE_URL_SERVER}/bookings/count`, {
+>>>>>>> de6cd67256adf42712549178c3e71853649d0fb3
             params: {
               classType: selectedClass,
               date: dateStr,
@@ -119,7 +127,11 @@ const ClassBooking = () => {
     }
     if (selectedDate && selectedTime) {
       try {
+<<<<<<< HEAD
         const response = await axios.post('https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app/bookings', {
+=======
+        const response = await axios.post(`${import.meta.env.VITE_URL_SERVER}/bookings`, {
+>>>>>>> de6cd67256adf42712549178c3e71853649d0fb3
           classType: selectedClass,
           date: selectedDate.toISOString().split('T')[0],
           time: selectedTime,

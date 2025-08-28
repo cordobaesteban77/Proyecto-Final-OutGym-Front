@@ -23,7 +23,11 @@ const ClasesUsuarios = () => {
       const decoded = jwtDecode(token);
       const userId = decoded.idUsuario || decoded.userId;
 
+<<<<<<< HEAD
       const res = await axios.get(`https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app/bookings/user/${userId}`, {
+=======
+      const res = await axios.get(`${import.meta.env.VITE_URL_SERVER}/bookings/user/${userId}`, {
+>>>>>>> de6cd67256adf42712549178c3e71853649d0fb3
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -53,7 +57,11 @@ const ClasesUsuarios = () => {
     if (confirm.isConfirmed) {
       try {
         const token = localStorage.getItem('token');
+<<<<<<< HEAD
         await axios.delete(`https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app/bookings/${bookingId}`, {
+=======
+        await axios.delete(`${import.meta.env.VITE_URL_SERVER}/bookings/${bookingId}`, {
+>>>>>>> de6cd67256adf42712549178c3e71853649d0fb3
           headers: { Authorization: `Bearer ${token}` }
         });
 

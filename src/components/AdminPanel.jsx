@@ -11,7 +11,11 @@ const AdminPanel = () => {
   
 
   useEffect(() => {
+<<<<<<< HEAD
     fetch('https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app/bookings')
+=======
+    fetch(`${import.meta.env.VITE_URL_SERVER}/bookings`)
+>>>>>>> de6cd67256adf42712549178c3e71853649d0fb3
       .then((res) => res.json())
       .then((data) => setBookings(data))
       .catch((err) => console.error('Error al obtener turnos:', err));
@@ -31,7 +35,11 @@ const AdminPanel = () => {
 
   if (result.isConfirmed) {
     try {
+<<<<<<< HEAD
       await fetch(`https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app/bookings/${id}`, {
+=======
+      await fetch(`${import.meta.env.VITE_URL_SERVER}/bookings/${id}`, {
+>>>>>>> de6cd67256adf42712549178c3e71853649d0fb3
         method: 'DELETE',
       });
       setBookings(bookings.filter((booking) => booking._id !== id));

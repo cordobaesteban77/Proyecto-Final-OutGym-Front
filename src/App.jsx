@@ -15,8 +15,17 @@ import AdminPage from "./pages/AdminPage.jsx";
 import ContactoC from "./components/contacto/ContactoC.jsx";
 import SolicitarTurnoPage from "./pages/SolicitarTurnoPage.jsx";
 import MisClasesUser from "./pages/MisClasesUser.jsx";
+<<<<<<< HEAD
 import SobreNosotros from "./components/Sobrenosotros.jsx";
 import Footer from './components/Footer.jsx'
+=======
+import PagoExitoso from "./pages/PagoExitoso.jsx";
+import PagoFallido from "./pages/PagoFallido.jsx";
+import PagoPendiente from "./pages/PagoPendiente.jsx";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
+
+>>>>>>> de6cd67256adf42712549178c3e71853649d0fb3
 
 const App = () => {
   return (
@@ -31,11 +40,16 @@ const App = () => {
             } />
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginScreen />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/about" element={<SobreNosotros />} />
           <Route path="/contact" element={<ContactoC />} />
           <Route path="/solicitarclase" element={<SolicitarTurnoPage/>}/>
           <Route path="/misclases" element={<MisClasesUser/>}/>
           <Route path="*" element={<NotFoundScreen />} />
+          <Route path="/pago-exitoso" element={<PagoExitoso />} />
+          <Route path="/pago-fallido" element={<PagoFallido />} />
+          <Route path="/pago-pendiente" element={<PagoPendiente />} />
         </Routes>
         <Footer />
       </BrowserRouter>

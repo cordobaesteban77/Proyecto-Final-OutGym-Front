@@ -66,7 +66,11 @@ const TablaProductos = ({
               </td>
               <td>
                 <img
+<<<<<<< HEAD
                   src={`https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app/uploads/${prod.imagen}`}
+=======
+                  src={`${import.meta.env.VITE_URL_SERVER}/uploads/${prod.imagen}`}
+>>>>>>> de6cd67256adf42712549178c3e71853649d0fb3
                   style={{
                     width: "60px",
                     height: "60px",
