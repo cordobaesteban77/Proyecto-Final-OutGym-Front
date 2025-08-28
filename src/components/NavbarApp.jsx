@@ -89,8 +89,9 @@ const NavbarApp = () => {
                   Mis Clases
                 </NavLink>
               </li>
-            ) : (
-              <li className="nav-item">
+            ) : "" 
+            }
+            <li className="nav-item">
               <NavLink
                 className={({ isActive }) =>
                   isActive ? "nav-link color-activo" : "nav-link text-light"
@@ -101,7 +102,6 @@ const NavbarApp = () => {
                 Contacto
               </NavLink>
             </li>
-            )}
             {usuario && usuario.rolUsuario === "usuario" ? (
               <li className="nav-item">
                 <NavLink

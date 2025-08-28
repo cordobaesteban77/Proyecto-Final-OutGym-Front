@@ -86,7 +86,7 @@ function PlanesC() {
   const pagarPlan = async (nombre, precio, idPlan) => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_URL_SERVER}/api/carrito/pagarPlanMp`,
+        `${import.meta.env.VITE_URL_SERVER}/carritos/pagarPlanMp`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
