@@ -1,7 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/usuarios/(.*)", "destination": "https://proyecto-final-out-gym-back.onrender.com/usuarios/$1" },
-    { "source": "/(.*)", "destination": "/" }
-  ]
-}
-
