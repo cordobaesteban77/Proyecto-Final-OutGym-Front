@@ -10,7 +10,7 @@ const ResetPassword = () => {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post(`${import.meta.env.VITE_URL_SERVER}/reset-password/${token}`, {
+      await axios.post(`${import.meta.env.VITE_URL_SERVER}/usuarios/reset-password/${token}`, {
         password: data.password,
       });
 
