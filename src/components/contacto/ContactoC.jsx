@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "emailjs-com";
 import "./ContactoC.css";
 import gymImage from "/images/contacto_gym.png";
 import Swal from "sweetalert2";
@@ -10,6 +11,7 @@ const ContactoC = () => {
     subject: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -19,31 +21,103 @@ const ContactoC = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Mostrar SweetAlert de éxito
-    Swal.fire({
-      title: "¡Mensaje enviado!",
-      text: "Gracias por contactarte con OUTGYM. Nos pondremos en contacto contigo pronto.",
-      icon: "success",
-      confirmButtonText: "Aceptar",
-      confirmButtonColor: "#1363df",
-      customClass: {
-        popup: "sweetalert-popup",
-        title: "sweetalert-title",
-        text: "sweetalert-text",
-        confirmButton: "sweetalert-confirm-button",
-      },
-    });
+    // Validar que el formulario tenga todos los campos requeridos
+    if (!formData.name || !formData.email || !formData.message) {
+      Swal.fire({
+        title: "Campos incompletos",
+        text: "Por favor, completa todos los campos obligatorios marcados con *",
+        icon: "warning",
+        confirmButtonText: "Aceptar",
+        confirmButtonColor: "#1363df",
+      });
+      return;
+    }
 
-    // Resetear el formulario después del envío
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
+    setIsSubmitting(true);
+
+    // Configuración de EmailJS
+    const serviceID = "service_fjey5xd";
+    const adminTemplateID = "template_a5n4b14"; // Plantilla para el administrador
+    const userTemplateID = "template_oq7sn3a"; // Plantilla para confirmación al usuario
+    const userID = "Ztw1LnEDQVzA8KStx";
+
+    try {
+      // Primero enviar el correo al administrador
+      const adminResponse = await emailjs.send(
+        serviceID,
+        adminTemplateID,
+        {
+          to_email: "danisuarze@gmail.com",
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject || "Consulta desde OUTGYM",
+          message: formData.message,
+          reply_to: formData.email, // Añadir esta línea
+        },
+        userID
+      );
+
+      console.log("Correo al administrador enviado con éxito!", adminResponse);
+
+      // Luego enviar el correo de confirmación al usuario
+      // Usar las variables exactas que espera la plantilla
+      const userResponse = await emailjs.send(
+        serviceID,
+        userTemplateID,
+        {
+          to_email: formData.email,
+          to_name: formData.name,
+          subject: "Confirmación de contacto - OUTGYM",
+          message: `Hola ${formData.name}, hemos recibido tu mensaje y nos pondremos en contacto contigo pronto. Gracias por contactarte con OUTGYM.`,
+          // Asegúrate de usar las variables exactas que espera tu plantilla
+          // Si tu plantilla usa {{user_email}} en lugar de {{to_email}}, debes cambiar esto
+        },
+        userID
+      );
+
+      console.log("Correo de confirmación enviado con éxito!", userResponse);
+
+      // Mostrar SweetAlert de éxito
+      Swal.fire({
+        title: "¡Mensaje enviado!",
+        text: "Gracias por contactarte con OUTGYM. Te hemos enviado un correo de confirmación.",
+        icon: "success",
+        confirmButtonText: "Aceptar",
+        confirmButtonColor: "#1363df",
+      });
+
+      // Resetear el formulario después del envío
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Error completo al enviar correo:", error);
+
+      // Mostrar SweetAlert de error con más detalles
+      Swal.fire({
+        title: "Error",
+        html: `
+          <p>Hubo un problema al enviar tu mensaje.</p>
+          <p><small>Código de error: ${
+            error.status || "Desconocido"
+          }</small></p>
+          <p><small>${
+            error.text || "Por favor, inténtalo de nuevo más tarde."
+          }</small></p>
+        `,
+        icon: "error",
+        confirmButtonText: "Aceptar",
+        confirmButtonColor: "#1363df",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -107,6 +181,7 @@ const ContactoC = () => {
                 required
                 value={formData.name}
                 onChange={handleChange}
+                disabled={isSubmitting}
               />
             </div>
 
@@ -119,6 +194,7 @@ const ContactoC = () => {
                 required
                 value={formData.email}
                 onChange={handleChange}
+                disabled={isSubmitting}
               />
             </div>
 
@@ -130,6 +206,7 @@ const ContactoC = () => {
                 placeholder="Motivo de tu consulta"
                 value={formData.subject}
                 onChange={handleChange}
+                disabled={isSubmitting}
               />
             </div>
 
@@ -142,11 +219,16 @@ const ContactoC = () => {
                 required
                 value={formData.message}
                 onChange={handleChange}
+                disabled={isSubmitting}
               ></textarea>
             </div>
 
-            <button type="submit" className="submit-btn">
-              Enviar Mensaje
+            <button
+              type="submit"
+              className="submit-btn"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Enviando..." : "Enviar Mensaje"}
             </button>
           </form>
         </div>

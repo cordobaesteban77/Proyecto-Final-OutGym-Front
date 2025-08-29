@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const API_URL = "https://proyecto-final-out-gym-back-qjy5bxspv.vercel.app";
+const API_URL = `${import.meta.env.VITE_URL_SERVER}`;
 
 const AdministrarUsuariosApp = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -104,7 +104,9 @@ const AdministrarUsuariosApp = () => {
           </div>
           <div className="mb-3">
             <label className="form-label">Rol del Usuario</label>
-            <select
+            {
+              formData.rolUsuario === "admin" ? <h3 className="text-danger">No es posible cambiarle el rol a un admin</h3> :
+              <select
               className="form-select"
               name="rolUsuario"
               value={formData.rolUsuario}
@@ -114,6 +116,7 @@ const AdministrarUsuariosApp = () => {
               <option value="usuario">usuario</option>
               <option value="admin">admin</option>
             </select>
+            }
           </div>
           <button type="submit" className="btn btn-success">Actualizar</button>
           <button
@@ -137,12 +140,15 @@ const AdministrarUsuariosApp = () => {
           <li key={user._id} className="list-group-item d-flex justify-content-between align-items-center">
             <div>
               <strong>{user.nombreUsuario}</strong> - {user.emailUsuario}
-              <div className="text-muted">Plan: {user.planContratado || "Ninguno"}</div>
+              {/* <div className="text-muted">Plan: {user.plan || "Ninguno"}</div> */}
               <div className="text-muted">Rol: {user.rolUsuario || "usuario"}</div>
             </div>
             <div>
               <button className="btn btn-sm btn-primary me-2" onClick={() => handleEditar(user)}>Editar</button>
-              <button className="btn btn-sm btn-danger" onClick={() => handleEliminar(user._id)}>Eliminar</button>
+              {
+                user.rolUsuario === "admin" ? <button className="btn btn-sm btn-danger disabled" onClick={() => handleEliminar(user._id)}>Eliminar</button>
+                : <button className="btn btn-sm btn-danger" onClick={() => handleEliminar(user._id)}>Eliminar</button>
+              }
             </div>
           </li>
         ))}
