@@ -33,7 +33,10 @@ const LoginScreen = () => {
       const { data } = await axios.post(`${import.meta.env.VITE_URL_SERVER}/usuarios/login`, {
         nombreUsuario: datos.nombreUsuario,
         password: datos.password
-      })
+      },
+    {
+    withCredentials: true
+  })
       localStorage.setItem("token", data.token)
       window.dispatchEvent(new Event("authChanged"));
       MySwal.fire({
